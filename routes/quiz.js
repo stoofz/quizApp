@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/connection');
 
-// Display quiz to be attempted based on params
+// Display quiz to be attempted based on params, aggregates answers into an array inside of one question object
 router.get('/:quiz_id', (req, res) => {
   db.query(`
   SELECT
