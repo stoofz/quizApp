@@ -45,7 +45,7 @@ INSERT INTO quiz_answers (quiz_answer_id, answer, correct) VALUES (9, '1967', FA
 
 INSERT INTO quiz_answers (quiz_answer_id, answer, correct) VALUES (10, '1980', FALSE);
 INSERT INTO quiz_answers (quiz_answer_id, answer, correct) VALUES (10, '1996', TRUE);
-INSERT INTO quiz_answers (quiz_asnwer_id, answer, correct) VALUES (10, '1981', FALSE);
+INSERT INTO quiz_answers (quiz_answer_id, answer, correct) VALUES (10, '1981', FALSE);
 INSERT INTO quiz_answers (quiz_answer_id, answer, correct) VALUES (10, '1988', FALSE);
 
 INSERT INTO quiz_answers (quiz_answer_id, answer, correct) VALUES (11, 'Toronto', TRUE);
