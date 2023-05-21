@@ -18,15 +18,15 @@
 </head>
 
 <body>
-
   <h1>Quiz</h1>
-
-  <% questions.forEach((question) => { %>
+  <% questions.forEach((question, index) => { %>
     <p><%= question.question %></p>
       <% question.answers.forEach((answer) => { %>
         <li>
-            <input type="radio" name="answer" value="<%= answer.answer %>">
+          <label>
+            <input type="radio" name="answer<%= index %>" value="<%= answer.answer %>">
             <%= answer.answer %>
+          </label>
         </li>
       <% }) %>
   <% }) %>
