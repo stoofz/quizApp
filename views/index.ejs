@@ -23,6 +23,7 @@
 
   <% quizzes.forEach(quiz => { %>
     <h2><%= quiz.title %></h2>
+    <a href="/quiz/<%= quiz.id %>">Take Quiz</a>
   <% }); %>
 
 </body>
