@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/connection');
 
-router.use(express.urlencoded({ extended: true }));
-
-// Display quiz to be attempted based on params, aggregates answers into an array inside of one question object
+// Display quiz to be attempted based on params, aggregates question answers into an array inside of each question object
 router.get('/:quiz_id', (req, res) => {
   db.query(`
   SELECT
@@ -48,8 +46,6 @@ router.get('/:quiz_id', (req, res) => {
 router.post('/:quiz_id', (req, res) => {
   console.log(req.body);
   const quizId = req.params.quiz_id;
-  //const queryParams = new URLSearchParams(req.body).toString();
-  //res.redirect(`/result/${quizId}?${queryParams}`);
   const formAnswers = JSON.stringify(req.body);
   res.redirect(`/result/${quizId}?data=${encodeURIComponent(formAnswers)}`);
 });
