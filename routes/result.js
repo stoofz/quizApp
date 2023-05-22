@@ -14,6 +14,7 @@ router.get('/:quiz_id', (req, res) => {
     .then(data => {
       const templateVar = {
         quizzes: data.rows,
+        quizId: req.params.quiz_id,
         title: data.rows[0].title,
         answers: JSON.parse(decodeURIComponent(req.query.data))
       };
