@@ -11,11 +11,10 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const db = require('../db/connection');
 
-/*
+
 router.get('/', (req, res) => {
   res.render('users');
 });
-*/
 
 // Post endpoint to add a new user to the database, bcrypts the password
 router.post('/register', (req, res) => {
