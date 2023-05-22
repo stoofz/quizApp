@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/connection');
 
+// Find questions and the answers for a quiz by quiz_id
 router.get('/:quiz_id', (req, res) => {
   db.query(`
   SELECT quizzes.title, quiz_questions.question, quiz_answers.answer, quiz_answers.correct
@@ -13,7 +14,6 @@ router.get('/:quiz_id', (req, res) => {
     .then(data => {
       const templateVar = {
         quizzes: data.rows,
-        quizId: req.params.quiz_id,
         title: data.rows[0].title,
         answers: JSON.parse(decodeURIComponent(req.query.data))
       };
