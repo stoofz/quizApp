@@ -34,6 +34,7 @@ app.use(express.static('public'));
 // const usersRoutes = require('./routes/users');
 const homeRoutes = require("./routes/index");
 const quizRoutes = require("./routes/quiz");
+const resultRoutes = require("./routes/result");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -45,6 +46,7 @@ const quizRoutes = require("./routes/quiz");
 
 app.use("/home", homeRoutes);
 app.use("/quiz", quizRoutes);
+app.use("/result", resultRoutes);
 
 // Note: mount other resources here, using the same pattern above
 

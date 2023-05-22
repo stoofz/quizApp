@@ -19,17 +19,22 @@
 
 <body>
   <h1>Quiz</h1>
-  <% questions.forEach((question, index) => { %>
-    <p><%= question.question %></p>
-      <% question.answers.forEach((answer) => { %>
-        <li>
-          <label>
-            <input type="radio" name="answer<%= index %>" value="<%= answer.answer %>">
-            <%= answer.answer %>
-          </label>
-        </li>
-      <% }) %>
-  <% }) %>
+
+  <form action="/quiz/<%= quizId %>" method="post">
+
+    <% questions.forEach((question, index) => { %>
+      <p><%= question.question %></p>
+        <% question.answers.forEach((answer) => { %>
+          <li>
+            <label>
+              <input type="radio" name="q<%= index %>" value="<%= answer.answer %>">
+              <%= answer.answer %>
+            </label>
+          </li>
+        <% }) %>
+    <% }) %>
+
+  <input type="submit" value="Submit">
 
 </body>
 

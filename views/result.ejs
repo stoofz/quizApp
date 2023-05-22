@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Quiz Results</title>
+
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+</head>
+
+<body>
+
+  <h1>Quiz Result</h1>
+
+  <% let score = 0; %>
+  <% quizzes.forEach((quiz, index) => { %>
+    <h3>Question <%= index + 1 %></h3>
+    <p><%= quiz.question %></p>
+    <p>Correct Answer: <%= quiz.answer %></p>
+
+    <p>Your Answer: <%= answers['q' + index ]%></p>
+
+    <% if (answers['q' + index] === quiz.answer) { %>
+      <p>Result: Correct</p>
+      <% score++; %>
+    <% } else { %>
+      <p>Result: Incorrect</p>
+    <% } %>
+    <hr>
+  <% }); %>
+
+  <h1>Score: <%= score %>/<%= quizzes.length %></h1>
+
+</body>
+
+</html>
