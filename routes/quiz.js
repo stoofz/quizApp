@@ -43,6 +43,7 @@ router.get('/:quiz_id', (req, res) => {
     });
 });
 
+// Post quiz answers to result page via JSON data
 router.post('/:quiz_id', (req, res) => {
   console.log(req.body);
   const quizId = req.params.quiz_id;
