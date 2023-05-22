@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 });
 */
 
-// Post endpoint to add a new user to the database
+// Post endpoint to add a new user to the database, bcrypts the password
 router.post('/register', (req, res) => {
   const hashedPassword = bcrypt.hashSync(req.body.password, 10);
   db.query(
@@ -31,10 +31,35 @@ router.get('/register', (req, res) => {
   res.render('register');
 });
 
-router.get('/login', (req, res) => {
 
+// Serve login page
+router.get('/login', (req, res) => {
   res.render('login');
 });
 
+// Post login credentials and check if they are valid
+router.post('/login', (req, res) => {
+  console.log(req.body.email);
+  console.log(req.body.password);
+
+  db.query('SELECT * FROM users WHERE email = $1', [req.body.email], (err, result) => {
+    if (err) {
+      res.status(500).send("Invalid login");
+    } else if (result.rows.length === 0) {
+      res.status(401).send('Invalid login');
+    } else {
+
+      const user = result.rows[0];
+      console.log(user);
+      const validPassword = bcrypt.compareSync(req.body.password, user.password);
+      if (validPassword) {
+        req.session.userId = user.id;
+        res.redirect('/home');
+      } else {
+        res.status(401).send('Invalid login');
+      }
+    }
+  });
+});
 
 module.exports = router;
