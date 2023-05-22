@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/connection');
 
-
+// Display all public quizzes
 router.get('/', (req, res) => {
   db.query(`
   SELECT *
