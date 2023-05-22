@@ -12,14 +12,14 @@ router.get('/:quiz_id', (req, res) => {
   WHERE quizzes.id = $1 AND quiz_answers.correct = TRUE;
   `, [req.params.quiz_id])
     .then(data => {
-      const templateVar = {
+      const templateVars = {
         quizzes: data.rows,
         quizId: req.params.quiz_id,
         title: data.rows[0].title,
         answers: JSON.parse(decodeURIComponent(req.query.data))
       };
-      res.render('../views/result', templateVar);
-      console.log(templateVar);
+      res.render('../views/result', templateVars);
+      console.log(templateVars);
     });
 });
 

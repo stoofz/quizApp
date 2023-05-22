@@ -35,11 +35,11 @@ router.get('/:quiz_id', (req, res) => {
    quiz_questions.id;`,
   [req.params.quiz_id])
     .then(data => {
-      let templateVar = {
+      let templateVars = {
         questions: data.rows,
         quizId: req.params.quiz_id};
-      res.render('../views/quiz', templateVar);
-      console.log(templateVar);
+      res.render('../views/quiz', templateVars);
+      console.log(templateVars);
     });
 });
 

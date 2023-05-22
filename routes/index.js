@@ -10,8 +10,8 @@ router.get('/', (req, res) => {
   WHERE public = TRUE;
   `)
     .then(data => {
-      const templateVar = { quizzes: data.rows };
-      res.render('../views/index', templateVar);
+      const templateVars = { quizzes: data.rows };
+      res.render('../views/index', templateVars);
     });
 });
 
