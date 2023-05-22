@@ -54,7 +54,7 @@ router.post('/login', (req, res) => {
       const validPassword = bcrypt.compareSync(req.body.password, user.password);
       if (validPassword) {
         req.session.userId = user.id;
-        res.redirect('/home');
+        res.redirect(302, '/home');
       } else {
         res.status(401).send('Invalid login');
       }

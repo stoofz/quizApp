@@ -48,7 +48,7 @@ router.post('/:quiz_id', (req, res) => {
   console.log(req.body);
   const quizId = req.params.quiz_id;
   const formAnswers = JSON.stringify(req.body);
-  res.redirect(`/result/${quizId}?data=${encodeURIComponent(formAnswers)}`);
+  res.redirect(302, `/result/${quizId}?data=${encodeURIComponent(formAnswers)}`);
 });
 
 module.exports = router;
