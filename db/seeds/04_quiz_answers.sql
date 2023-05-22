@@ -9,9 +9,9 @@ INSERT INTO quiz_answers (quiz_answer_id, answer, correct) VALUES (2, '8080', FA
 INSERT INTO quiz_answers (quiz_answer_id, answer, correct) VALUES (2, '53', TRUE);
 
 INSERT INTO quiz_answers (quiz_answer_id, answer, correct) VALUES (3, '993', FALSE);
-INSERT INTO quiz_answers (quiz_answer_id, answer, correct) VALUES (3, '443', FALSE);
+INSERT INTO quiz_answers (quiz_answer_id, answer, correct) VALUES (3, '443', TRUE);
 INSERT INTO quiz_answers (quiz_answer_id, answer, correct) VALUES (3, '25', FALSE);
-INSERT INTO quiz_answers (quiz_answer_id, answer, correct) VALUES (3, '22', TRUE);
+INSERT INTO quiz_answers (quiz_answer_id, answer, correct) VALUES (3, '22', FALSE);
 
 INSERT INTO quiz_answers (quiz_answer_id, answer, correct) VALUES (4, '25', TRUE);
 INSERT INTO quiz_answers (quiz_answer_id, answer, correct) VALUES (4, '547', FALSE);
