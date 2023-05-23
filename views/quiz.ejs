@@ -25,10 +25,10 @@
 
     <% questions.forEach((question, index) => { %>
       <p><%= question.question %></p>
-        <% question.answers.forEach((answer) => { %>
+        <% question.answers.forEach((answer, answer_index) => { %>
           <li>
             <label>
-              <input type="radio" name="q<%= index %>" value="<%= answer.answer %>">
+              <input type="radio" name="q<%= index %>" value="<%= answer_index %>">
               <%= answer.answer %>
             </label>
           </li>
@@ -37,6 +37,7 @@
 
   <input type="submit" value="Submit">
 
+  </form>
 </body>
 
 </html>

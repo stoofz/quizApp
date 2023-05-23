@@ -43,13 +43,43 @@ router.get('/:quiz_id', (req, res) => {
     });
 });
 
-// Post quiz answers to result page via JSON data
+
+// Insert quiz answers to db via JSON data
 router.post('/:quiz_id', (req, res) => {
-  console.log(req.body);
   const quizId = req.params.quiz_id;
-  const formAnswers = JSON.stringify(req.body);
-  res.redirect(302, `/result/${quizId}?data=${encodeURIComponent(formAnswers)}`);
+  const userId = req.session.userId;
+  let score = 0;
+
+  console.log(req.body);
+  console.log(quizId);
+  console.log(userId);
+
+  db.query(`
+  SELECT quizzes.title, quiz_questions.question, quiz_answers.answer, quiz_answers.correct
+  FROM quizzes
+  JOIN quiz_questions ON quizzes.id = quiz_questions.quiz_id
+  JOIN quiz_answers ON quiz_questions.id = quiz_answers.quiz_answer_id
+  WHERE quizzes.id = $1 AND quiz_answers.correct = TRUE;
+  `, [req.params.quiz_id])
+    .then(data => {
+      const correctAnswers = data.rows;
+      const submittedAnswers = req.body;
+      console.log(correctAnswers[req.body[`q${1}`]]);
+      console.log(submittedAnswers[`q${1}`]);
+      console.log(correctAnswers[submittedAnswers[`q${1}`]].answer);
+      for (let i = 0; i < correctAnswers.length; i++) {
+        if (correctAnswers[i].answer === correctAnswers[submittedAnswers[`q${i}`]].answer) {
+          score++;
+        }
+      }
+
+      db.query(`INSERT INTO quiz_attempts
+      (quiz_id, user_id, answer_one, answer_two, answer_three, answer_four, quiz_result)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING *;`, [quizId, userId, parseInt(submittedAnswers[`q${0}`]), parseInt(submittedAnswers[`q${1}`]), parseInt(submittedAnswers[`q${2}`]), parseInt(submittedAnswers[`q${3}`]), score]);
+    });
+  //const formAnswers = JSON.stringify(req.body);
+  //res.redirect(302, `/result/${quizId}?data=${encodeURIComponent(formAnswers)}`);
 });
 
 module.exports = router;
-
