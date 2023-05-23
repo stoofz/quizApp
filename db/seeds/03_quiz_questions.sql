@@ -2,16 +2,13 @@ INSERT INTO quiz_questions (quiz_id, question) VALUES (1, 'What port is Secure S
 INSERT INTO quiz_questions (quiz_id, question) VALUES (1, 'What port is Domain Name System DNS?');
 INSERT INTO quiz_questions (quiz_id, question) VALUES (1, 'What port is Hyper Text Transfer Protocol Secure HTTPS?');
 INSERT INTO quiz_questions (quiz_id, question) VALUES (1, 'What port is Simple Mail Transfer Protocol SMTP?');
-INSERT INTO quiz_questions (quiz_id, question) VALUES (1, 'What port is File Transfer Protocol? FTP');
 
 INSERT INTO quiz_questions (quiz_id, question) VALUES (2, 'What year was The Rock released?');
 INSERT INTO quiz_questions (quiz_id, question) VALUES (2, 'What year was Pulp Fiction Released?');
 INSERT INTO quiz_questions (quiz_id, question) VALUES (2, 'What year was The Matrix released?');
 INSERT INTO quiz_questions (quiz_id, question) VALUES (2, 'What year was Training Day released?');
-INSERT INTO quiz_questions (quiz_id, question) VALUES (2, 'What year was Fargo released?');
 
 INSERT INTO quiz_questions (quiz_id, question) VALUES (3, 'Whats the capital of Ontario?');
 INSERT INTO quiz_questions (quiz_id, question) VALUES (3, 'Whats the capital of British Columbia?');
 INSERT INTO quiz_questions (quiz_id, question) VALUES (3, 'Whats the capital of Colorado?');
 INSERT INTO quiz_questions (quiz_id, question) VALUES (3, 'Whats the capital of England?');
-INSERT INTO quiz_questions (quiz_id, question) VALUES (3, 'Whats the captial of Canada?');
