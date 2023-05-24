@@ -20,25 +20,28 @@
   <%- include('partials/_header') %>
 
   <h1>Quiz Result</h1>
-  <h2><%= title %></h2>
 
-  <% let score = 0; %>
+  <h1>Quiz ID: <%= quizResultId %></h1>
+
+
+  <h2><%= quizTitle %></h2>
+
+
   <% quizzes.forEach((quiz, index) => { %>
     <h3>Question <%= index + 1 %></h3>
     <p><%= quiz.question %></p>
     <p>Correct Answer: <%= quiz.answer %></p>
 
-    <p>Your Answer: <%= answers['q' + index ]%></p>
+    <p>Your Answer: <%= answers[ index ]%></p>
 
-    <% if (answers['q' + index] === quiz.answer) { %>
+    <% if (answers[ index] === quiz.answer) { %>
       <p>Result: Correct</p>
-      <% score++; %>
     <% } else { %>
       <p>Result: Incorrect</p>
     <% } %>
   <% }); %>
 
-  <h1>Score: <%= score %>/<%= quizzes.length %></h1>
+  <h1>Score: <%= quizResult %>/<%= quizzes.length %></h1>
 
 </body>
 

@@ -28,7 +28,8 @@
         <% question.answers.forEach((answer, answer_index) => { %>
           <li>
             <label>
-              <input type="radio" name="q<%= index %>" value="<%= answer_index %>">
+              <input type="radio" name="a<%= index %>" value="<%= answer.answer %>">
+
               <%= answer.answer %>
             </label>
           </li>
