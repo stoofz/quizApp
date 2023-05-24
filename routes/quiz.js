@@ -65,8 +65,13 @@ router.post('/:quiz_id', (req, res) => {
       const submittedAnswers = req.body;
 
       for (let i = 0; i < correctAnswers.length; i++) {
+
+        console.log("Submitted " + submittedAnswers[`a${i}`]);
         if (correctAnswers[i].answer === submittedAnswers[`a${i}`]) {
           score++;
+        } else if (submittedAnswers[`a${i}`] === undefined) {
+          arrayAnswers.push("Skipped");
+          continue;
         }
         arrayAnswers.push(submittedAnswers[`a${i}`]);
       }
