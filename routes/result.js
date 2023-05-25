@@ -5,7 +5,6 @@ const db = require('../db/connection');
 // Find questions and the answers for a quiz by quiz_id
 router.get('/:quizResultId', (req, res) => {
   db.query(`
-
   SELECT quiz_result, quizzes.title, quiz_questions.question, quiz_answers.answer, quiz_answers.correct
   FROM quiz_attempts
   JOIN quizzes ON quiz_attempts.quiz_id = quizzes.id
@@ -22,7 +21,7 @@ router.get('/:quizResultId', (req, res) => {
         quizTitle: data.rows[0].title,
         quizResultId: req.params.quizResultId,
       };
-      console.log("Score is at " + data.rows[0].quiz_result);
+      //console.log("Score is at " + data.rows[0].quiz_result);
 
       const newData = await db.query(`
       SELECT array_agg(answer) AS answers
@@ -30,11 +29,16 @@ router.get('/:quizResultId', (req, res) => {
       JOIN user_answers ON quiz_answers.id = user_answers.answer_id
       WHERE user_answers.quiz_attempt_id = $1;
       `, [req.params.quizResultId]);
-      // console.log(req.params.quizResultId);
+
+      if (newData.rows[0].answers === null) {
+        templateVars.answers = [];
+      } else {
+        templateVars.answers = newData.rows[0].answers;
+      }
+
       console.log("Answers array " + newData.rows[0].answers);
-      templateVars.answers = newData.rows[0].answers;
+
       res.render('../views/result', templateVars);
-      console.log(templateVars);
     });
 });
 module.exports = router;
