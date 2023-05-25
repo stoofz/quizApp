@@ -21,8 +21,6 @@
 
   <h1>Quiz Result</h1>
 
-  <h1>Quiz ID: <%= quizResultId %></h1>
-
 
   <h2><%= quizTitle %></h2>
 
@@ -32,13 +30,20 @@
     <p><%= quiz.question %></p>
     <p>Correct Answer: <%= quiz.answer %></p>
 
-    <p>Your Answer: <%= answers[ index ]%></p>
+    <% if (answers !== null && answers !== undefined) { %>
+      <p>Your Answer: <%= answers[index] %></p>
 
-    <% if (answers[ index] === quiz.answer) { %>
-      <p>Result: Correct</p>
+      <% if (answers[index] === quiz.answer) { %>
+        <p>Result: Correct</p>
+      <% } else { %>
+        <p>Result: Incorrect</p>
+      <% } %>
+
     <% } else { %>
+      <P>Your Answer: </P>
       <p>Result: Incorrect</p>
     <% } %>
+
   <% }); %>
 
   <h1>Score: <%= quizResult %>/<%= quizzes.length %></h1>
