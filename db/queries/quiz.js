@@ -38,7 +38,7 @@ const insertQuizAttempt = function(quizId, userId, quizScore) {
 // Load correct answers to quiz question set from database
 const loadCorrectAnswers = function(quizId) {
   return db.query(`
-  SELECT quizzes.title, quiz_questions.question, quiz_answers.answer, quiz_answers.correct, quiz_questions.quiz_id as qId
+  SELECT quizzes.title, quiz_questions.question, quiz_answers.answer, quiz_answers.correct, quiz_questions.quiz_id
   FROM quizzes
   JOIN quiz_questions ON quizzes.id = quiz_questions.quiz_id
   JOIN quiz_answers ON quiz_questions.id = quiz_answers.quiz_answer_id

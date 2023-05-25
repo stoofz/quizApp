@@ -33,9 +33,8 @@ router.post('/:quiz_id', (req, res) => {
   const userId = req.session.userId;
 
   let score = 0;
-  let answerId = 0;
+  let answerId = null;
   let quizResultId = 0;
-  let qId = 0;
 
   // Create an initial column in quiz_attempts table for the quiz attempt
   insertQuizAttempt(quizId, userId, score)
@@ -48,14 +47,12 @@ router.post('/:quiz_id', (req, res) => {
 
           const correctAnswers = data;
           const submittedAnswers = req.body;
-          qId = correctAnswers[0].qid;
 
           for (let i = 0; i < correctAnswers.length; i++) {
 
             // Find answer id from submitted answer
             findAnswerId(submittedAnswers[`a${i}`])
               .then(data => {
-                console.log(data[0]);
                 if (data[0] === undefined) {
                   answerId = null;
                 } else {
@@ -68,9 +65,8 @@ router.post('/:quiz_id', (req, res) => {
               score++;
             }
           }
-
           // Update score in quiz_attempts table
-          addQuizResult(quizResultId, userId, qId, score)
+          addQuizResult(quizResultId, userId, quizId, score)
             .then(() => {
               res.redirect(302, `/result/${quizResultId}`);
             });
