@@ -53,7 +53,7 @@ ul.answer-box {
 .quiz-container .submit-button {
   background-color: #007bff;
   border: none;
-  color: white;
+  color: #fff;
   padding: 12px 24px;
   font-size: 16px;
   border-radius: 8px;
@@ -75,5 +75,8 @@ ul.answer-box {
 
 .question {
   margin: 2em;
+}
 
+.quiz-header {
+  margin: 1.5em;
 }
