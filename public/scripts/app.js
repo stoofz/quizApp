@@ -1,5 +1,6 @@
 // Client facing scripts here
 /* eslint-env jquery */
+/* eslint-disable no-unused-vars */
 
 const selectAnswer = (button, index) => {
   const questionBox = $(button).closest('.question-box');
@@ -11,3 +12,5 @@ const selectAnswer = (button, index) => {
 
   userAnswer.val(button.value);
 };
+
+/* eslint-enable no-unused-vars */
