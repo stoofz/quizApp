@@ -19,6 +19,7 @@ router.get('/:quiz_id', (req, res) => {
         .then(data => {
           let templateVars = {
             questions: data,
+            quizTitle: data[0].title,
             quizId: req.params.quiz_id
           };
           res.render('../views/quiz', templateVars);
@@ -36,6 +37,7 @@ router.post('/:quiz_id', (req, res) => {
   let answerId = null;
   let quizResultId = 0;
 
+
   // Create an initial column in quiz_attempts table for the quiz attempt
   insertQuizAttempt(quizId, userId, score)
     .then(data => {
@@ -46,12 +48,12 @@ router.post('/:quiz_id', (req, res) => {
         .then(data => {
 
           const correctAnswers = data;
-          const submittedAnswers = req.body;
+          const submittedAnswers = req.body.a;
 
           for (let i = 0; i < correctAnswers.length; i++) {
 
             // Find answer id from submitted answer
-            findAnswerId(submittedAnswers[`a${i}`])
+            findAnswerId(submittedAnswers[`${i}`])
               .then(data => {
                 if (data[0] === undefined) {
                   answerId = null;
@@ -61,7 +63,7 @@ router.post('/:quiz_id', (req, res) => {
                 // Insert user answer_id into user_answers table
                 insertUserAnswer(quizResultId, answerId);
               });
-            if (correctAnswers[i].answer === submittedAnswers[`a${i}`]) {
+            if (correctAnswers[i].answer === submittedAnswers[`${i}`]) {
               score++;
             }
           }

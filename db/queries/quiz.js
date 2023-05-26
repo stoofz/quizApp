@@ -64,7 +64,6 @@ const findAnswerId = function(submittedAnswer) {
 
 // Insert user answer_id into user_answers table
 const insertUserAnswer = function(quizResultId, answerId) {
-  console.log('quizResultId', quizResultId);
   return db.query(`
   INSERT INTO user_answers (quiz_attempt_id, answer_id)
   VALUES ($1, $2);`, [quizResultId, answerId])
