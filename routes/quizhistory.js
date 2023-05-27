@@ -17,13 +17,14 @@ router.get('/:user_id', (req, res) => {
     .then(() => {
       const userId = req.params.user_id;
 
+
       // Fetch quiz history for the user
       getQuizHistoryforUser(userId)
         .then(data => {
           if (data.length === 0) {
             res.render('../views/quizhistory', { results: [] }); // Empty array for no quiz results
           } else {
-            const templateVars = { results: data.rows };
+            const templateVars = { results: data };
             res.render('../views/quizhistory', templateVars);
           }
         })
