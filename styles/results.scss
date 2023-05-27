@@ -14,9 +14,7 @@
   padding: 15px;
   border-radius: 8px;
   margin: 3em;
-
 }
-
 
 .question-header {
   font-weight: bold;
@@ -40,4 +38,38 @@
   background-color: #007bff;
   color: #fff;
   border-radius: 8px;
+}
+
+.correct-answer-box {
+  color:  #0a8927;
+  display: block;
+  width: 100%;
+  border: 1px solid #0a8927;
+  padding: 8px 12px;
+  margin: 5px 0;
+  background-color: #85ffa1;
+  font-weight: bold;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.incorrect-answer-box {
+  color:  #dc3545;
+  border: 1px solid #dc3545;
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  margin: 5px 0;
+  background-color: #ce9a9f;
+  font-weight: bold;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.answer-box-answer {
+  flex: 1;
 }

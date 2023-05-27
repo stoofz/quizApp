@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/results.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet"
@@ -46,21 +47,25 @@
             <p><%= quiz.question %></p>
             </div>
 
-
-            <p>Correct Answer: <%= quiz.answer %></p>
-
             <% if (answers !== null && answers !== undefined) { %>
-              <p>Your Answer: <%= answers[index] %></p>
 
               <% if (answers[index] === quiz.answer) { %>
-                <p>Result: Correct</p>
+                <div class="correct-answer-box">
+                  <span class="answer-box-answer"><%= answers[index] %></span>
+                   <i class="fa-solid fa-check"></i>
+                </div>
+
               <% } else { %>
-                <p>Result: Incorrect</p>
+                <div class="incorrect-answer-box">
+                  <span class="answer-box-answer"><%= answers[index] %></span>
+                  <i class="fa-solid fa-x"></i>
+                </div>
+                <div class="correct-answer-box">
+                  <span class="answer-box-answer"><%= quiz.answer %></span>
+              </div>
               <% } %>
 
-            <% } else { %>
-              <P>Your Answer: </P>
-              <p>Result: Incorrect</p>
+
             <% } %>
 
             </div>
