@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,54 +15,52 @@
   <link rel="stylesheet" href="/styles/nav.css" />
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet"
-  href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-  crossorigin="anonymous"
-  />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous" />
 
   <!-- App JS -->
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
-  
+
 
 </head>
+
 <body>
   <%- include('partials/_header') %>
-  
-  <div class="container">
-    <h2>Create New Quiz</h2>
-    <form action="/quiz" method="POST">
-      <label for="quiz-title">Quiz Title:</label>
-      <input type="text" id="quiz-title" name="quizTitle" required>
-      
-      <label for="question">Question:</label>
-      <input type="text" id="question" name="question" required>
-      
-      <label for="option1">Option 1:</label>
-      <input type="text" id="option1" name="option1" required>
-      
-      <label for="option2">Option 2:</label>
-      <input type="text" id="option2" name="option2" required>
-      
-      <label for="option3">Option 3:</label>
-      <input type="text" id="option3" name="option3" required>
-      
-      <label for="option4">Option 4:</label>
-      <input type="text" id="option4" name="option4" required>
-      
-      <label for="correct-answer">Correct Answer:</label>
-      <select id="correct-answer" name="correctAnswer" required>
-        <option value="option1">Option 1</option>
-        <option value="option2">Option 2</option>
-        <option value="option3">Option 3</option>
-        <option value="option4">Option 4</option>
-      </select>
-      
-      <button type="submit">Submit Quiz</button>
-    </form>
-  </div>
-  
-</body>
-</html>
 
+    <div class="container">
+      <h2>Create New Quiz</h2>
+      <form action="/new" method="POST">
+        <label for="quiz-title">Quiz Title:</label>
+        <input type="text" id="quiz-title" name="quizTitle" required>
+
+        <label for="question">Question:</label>
+        <input type="text" id="question" name="question" required>
+
+        <label for="option1">Option 1:</label>
+        <input type="text" id="option1" name="option1" required>
+
+        <label for="option2">Option 2:</label>
+        <input type="text" id="option2" name="option2" required>
+
+        <label for="option3">Option 3:</label>
+        <input type="text" id="option3" name="option3" required>
+
+        <label for="option4">Option 4:</label>
+        <input type="text" id="option4" name="option4" required>
+
+        <label for="correct-answer">Correct Answer:</label>
+        <select id="correct-answer" name="correctAnswer" required>
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+          <option value="option4">Option 4</option>
+        </select>
+
+        <button type="submit">Submit Quiz</button>
+      </form>
+    </div>
+
+</body>
+
+</html>

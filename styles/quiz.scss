@@ -32,7 +32,7 @@ ul.answer-box {
 .answer-box button {
   display: block;
   width: 100%;
-  border: 1px solid #495057;
+  border: none;
   padding: 8px 12px;
   margin: 5px 0;
   background-color: #f7f7f7;
@@ -48,6 +48,12 @@ ul.answer-box {
 .answer-box button.selected {
   background-color: #007bff;
   color: #fff;
+  border: none;
+  outline: none;
+}
+
+.answer-box button:active {
+  outline: none;
 }
 
 .quiz-container .submit-button {

@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/results.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet"
@@ -28,36 +30,56 @@
 
 <body>
   <%- include('partials/_header') %>
+  <div class="quiz-header">
+    <h1>🥔 QuizApp Quiz</h1>
+    </div>
 
-  <h1>Quiz Result</h1>
+  <div class="quiz-container">
+    <h2><%= quizTitle %></h2>
+
+      <div class = "result-box">
+          <% quizzes.forEach((quiz, index) => { %>
+            <div class="question-box">
+              <div class="question-header">
+                <h3>Question #<%= index + 1 %></h3>
+              </div>
+            <div class="question">
+            <p><%= quiz.question %></p>
+            </div>
+
+            <% if (answers !== null && answers !== undefined) { %>
+
+              <% if (answers[index] === quiz.answer) { %>
+                <div class="correct-answer-box">
+                  <span class="answer-box-placeholder"></span>
+                  <span class="answer-box-answer"><%= answers[index] %></span>
+                   <i class="fa-solid fa-check"></i>
+                </div>
+
+              <% } else { %>
+                <div class="incorrect-answer-box">
+                  <span class="answer-box-placeholder"></span>
+                  <span class="answer-box-answer"><%= answers[index] %></span>
+                  <i class="fa-solid fa-x"></i>
+                </div>
+                <div class="correct-answer-box">
+                  <span class="answer-box-answer"><%= quiz.answer %></span>
+              </div>
+              <% } %>
 
 
-  <h2><%= quizTitle %></h2>
+            <% } %>
 
+            </div>
+          <% }); %>
 
-  <% quizzes.forEach((quiz, index) => { %>
-    <h3>Question <%= index + 1 %></h3>
-    <p><%= quiz.question %></p>
-    <p>Correct Answer: <%= quiz.answer %></p>
+        <div class="result-display">
+        <h3>Result</h3>
+        <span class="result-score"><%= quizResult %> / <%= quizzes.length %></span>
+        </div>
 
-    <% if (answers !== null && answers !== undefined) { %>
-      <p>Your Answer: <%= answers[index] %></p>
-
-      <% if (answers[index] === quiz.answer) { %>
-        <p>Result: Correct</p>
-      <% } else { %>
-        <p>Result: Incorrect</p>
-      <% } %>
-
-    <% } else { %>
-      <P>Your Answer: </P>
-      <p>Result: Incorrect</p>
-    <% } %>
-
-  <% }); %>
-
-  <h1>Score: <%= quizResult %>/<%= quizzes.length %></h1>
-
+      </div>
+</div>
 </body>
 
 </html>

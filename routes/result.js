@@ -29,7 +29,15 @@ router.get('/:quizResultId', (req, res) => {
           }
 
           res.render('../views/result', templateVars);
+        })
+        .catch(err => {
+          console.error('Error loading user provided answers: ', err);
+          res.status(500).send('Internal Server Error');
         });
+    })
+    .catch(err => {
+      console.error('Error loading correct answers: ', err);
+      res.status(500).send('Internal Server Error');
     });
 });
 module.exports = router;
