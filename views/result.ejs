@@ -51,12 +51,14 @@
 
               <% if (answers[index] === quiz.answer) { %>
                 <div class="correct-answer-box">
+                  <span class="answer-box-placeholder"></span>
                   <span class="answer-box-answer"><%= answers[index] %></span>
                    <i class="fa-solid fa-check"></i>
                 </div>
 
               <% } else { %>
                 <div class="incorrect-answer-box">
+                  <span class="answer-box-placeholder"></span>
                   <span class="answer-box-answer"><%= answers[index] %></span>
                   <i class="fa-solid fa-x"></i>
                 </div>

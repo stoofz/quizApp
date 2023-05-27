@@ -12,6 +12,7 @@ router.get('/:quiz_id', (req, res) => {
     .then(exists => {
       if (!exists) {
         res.redirect('/users/login');
+        return;
       }
     })
     .then(() => {
@@ -54,6 +55,7 @@ router.post('/:quiz_id', (req, res) => {
     .then(exists => {
       if (!exists) {
         res.status(401).send('Must be logged in to submit a quiz');
+        return;
       }
     })
     .then(() => {
@@ -72,7 +74,7 @@ router.post('/:quiz_id', (req, res) => {
           quizResultId = data[0].id;
 
           // Load correct answers to quiz question
-          return loadCorrectAnswers(quizId)
+          loadCorrectAnswers(quizId)
             .then(data => {
 
               const correctAnswers = data;
@@ -104,7 +106,7 @@ router.post('/:quiz_id', (req, res) => {
                 }
               }
               // Update score in quiz_attempts table
-              addQuizResult(quizResultId, userId, quizId, score)
+              return addQuizResult(quizResultId, userId, quizId, score)
                 .then(() => {
                   res.redirect(302, `/result/${quizResultId}`);
                 });

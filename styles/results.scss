@@ -40,36 +40,34 @@
   border-radius: 8px;
 }
 
-.correct-answer-box {
-  color:  #0a8927;
-  display: block;
-  width: 100%;
-  border: 1px solid #0a8927;
-  padding: 8px 12px;
-  margin: 5px 0;
-  background-color: #85ffa1;
-  font-weight: bold;
-  border-radius: 8px;
+.correct-answer-box,
+.incorrect-answer-box {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  padding: 8px 12px;
+  margin: 5px 0;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.correct-answer-box {
+  color:  #0a8927;
+  border: 1px solid #0a8927;
+  background-color: #85ffa1;
 }
 
 .incorrect-answer-box {
   color:  #dc3545;
   border: 1px solid #dc3545;
-  display: block;
-  width: 100%;
-  padding: 8px 12px;
-  margin: 5px 0;
   background-color: #ce9a9f;
-  font-weight: bold;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .answer-box-answer {
   flex: 1;
+}
+
+.answer-box-placeholder {
+  margin-left: 0.75em;
 }
