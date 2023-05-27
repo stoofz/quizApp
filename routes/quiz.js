@@ -23,6 +23,10 @@ router.get('/:quiz_id', (req, res) => {
             quizId: req.params.quiz_id
           };
           res.render('../views/quiz', templateVars);
+        })
+        .catch(err => {
+          console.error('Error creating quiz and answer array: ', err);
+          res.status(500).send('Internal Server Error');
         });
     });
 });
@@ -61,7 +65,15 @@ router.post('/:quiz_id', (req, res) => {
                   answerId = data[0].id;
                 }
                 // Insert user answer_id into user_answers table
-                insertUserAnswer(quizResultId, answerId);
+                insertUserAnswer(quizResultId, answerId)
+                  .catch(err => {
+                    console.error('Error inserting answer_id to user_answer table: ', err);
+                    res.status(500).send('Internal Server Error');
+                  });
+              })
+              .catch(err => {
+                console.error('Error finding answer id: ', err);
+                res.status(500).send('Internal Server Error');
               });
             if (correctAnswers[i].answer === submittedAnswers[`${i}`]) {
               score++;
@@ -72,7 +84,15 @@ router.post('/:quiz_id', (req, res) => {
             .then(() => {
               res.redirect(302, `/result/${quizResultId}`);
             });
+        })
+        .catch(err => {
+          console.error('Error loading correct answers: ', err);
+          res.status(500).send('Internal Server Error');
         });
+    })
+    .catch(err => {
+      console.error('Error inserting quiz attempt: ', err);
+      res.status(500).send('Internal Server Error');
     });
 });
 
