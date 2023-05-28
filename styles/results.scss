@@ -1,3 +1,8 @@
+.quiz-header {
+  padding-top: 6em;
+  margin: 1.5em;
+}
+
 .quiz-container {
   display: flex;
   flex-direction: column;
@@ -27,9 +32,7 @@
   margin: 2em;
 }
 
-.quiz-header {
-  margin: 1.5em;
-}
+
 
 .result-score {
   font-weight: bold;

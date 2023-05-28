@@ -14,23 +14,19 @@ router.get('/', (req, res) => {
 
       mostDifficult()
         .then(dataDifficult => {
-          console.log(dataDifficult);
           templateVars.mostDifficult = dataDifficult;
         })
         .then(() => {
 
           mostTaken()
             .then(dataTaken => {
-              console.log(dataTaken);
               templateVars.mostTaken = dataTaken;
             })
 
             .then(() => {
               mostCreated()
                 .then(dataCreated => {
-                  console.log(dataCreated);
                   templateVars.mostCreated = dataCreated;
-                  console.log(templateVars);
                   res.render('../views/leaderboards', templateVars);
                 });
             });
