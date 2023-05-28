@@ -8,7 +8,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/connection');
-const { createNewQuiz } = require('../db/queries/newquiz');
+const { createNewQuiz } = require('../db/queries/newquiz.js');
 
 router.get('/', (req, res) => {
   // const userId = req.session.userId;
@@ -22,30 +22,41 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
 
   /*
-    - update the syntax to use const {quizTilte, etc} = req.body;
     - add option for setting quiz to be public or private, edit db query accordingly
   */
 
-  // Access the form data using req.body
-  const quizTitle = req.body.quizTitle;
-  const question = req.body.question;
-  const option1 = req.body.option1;
-  const option2 = req.body.option2;
-  const option3 = req.body.option3;
-  const option4 = req.body.option4;
-  const correctAnswer = req.body.correctAnswer;
+  // Access the form data using req.body and user id through the session cookie.
+  const submission = req.body;
+  const userId = req.session.userId;
 
+  const title = submission.quizTitle;
+  const question = submission.question;
+  const option1 = submission.option1;
+  const option2 = submission.option2;
+  const option3 = submission.option3;
+  const option4 = submission.option4;
+
+  const answers = [option1, option2, option3, option4];
+  let correctAnswer = submission.correctAnswer;
+
+  if (correctAnswer === "option1") {
+    correctAnswer = option1;
+  } else if (correctAnswer === "option2") {
+    correctAnswer = option2;
+  } else if (correctAnswer === "option3") {
+    correctAnswer = option3;
+  } else if (correctAnswer === "option4") {
+    correctAnswer = option4;
+  }
+
+  console.log(correctAnswer);
   console.log('Quiz submitted sucessfully!');
+  console.log(submission);
+  console.log(userId);
 
-  createNewQuiz(req.session.userId, quizTitle);
-
+  createNewQuiz(userId, title, question, answers, correctAnswer);
+  console.log("quiz created");
   res.redirect('/home');
-
 });
-
-
-
-//need to set up db query to handled POST req and INSERT into quizzes db
-
 
 module.exports = router;
