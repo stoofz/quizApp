@@ -1,0 +1,46 @@
+.leaderboards-header {
+  margin: 1.5em;
+}
+
+.leaderboards-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.leaderboards-entry{
+  text-align: center;
+  list-style: none;
+  border: 1px solid #495057;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 3em;
+}
+
+.entry-header {
+  margin: 0.5em;
+  color: #007bff;
+  border-bottom: 1px solid #495057;
+  padding-bottom: 0.2em;
+};
+
+.entry-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.entry-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.even {
+  padding: 10px;
+  background-color: #f2f2f26f;
+}
+
+.odd{
+  padding: 10px;
+  background-color: #ffffff44;
+}

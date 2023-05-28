@@ -46,13 +46,14 @@ const mostPopular = function() {
 
 const mostDifficult = function() {
   return db.query(`
-  SELECT title, AVG(quiz_attempts.quiz_result) AS average_result
+  SELECT title, COUNT(quiz_attempts.quiz_id) AS count, ROUND((AVG(quiz_attempts.quiz_result) / COUNT(DISTINCT quiz_questions.question)) * 100) AS avg_percentage
   FROM quizzes
   JOIN quiz_attempts ON quizzes.id = quiz_attempts.quiz_id
+  JOIN quiz_questions ON quizzes.id = quiz_questions.quiz_id
   GROUP BY title
-  HAVING COUNT(quiz_id) >= 5
-  ORDER BY average_result ASC
-  LIMIT 5;`)
+  HAVING COUNT(quiz_attempts.quiz_id) >= 5
+  ORDER BY avg_percentage ASC
+  LIMIT 5;;`)
     .then(data => {
       return data.rows;
     });

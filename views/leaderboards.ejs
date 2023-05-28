@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/leaderboards.css" />
 
 
   <!-- Bootstrap CSS -->
@@ -32,39 +33,84 @@
   <%- include('partials/_header') %>
 
   <div class="leaderboards-header">
-  <h1>QuizApp Leaderboards</h1>
+  <h1>QuizApp Top 5 Leaderboards</h1>
   </div>
 
   <div class="leaderboards-container">
 
-    <h3>Top 5 Most Popular Quizzes</h3>
+    <div class="leaderboards-entry">
+    <h3><span class="entry-header">Most Popular Quizzes</span></h3>
     <% mostPopular.forEach((item, index) => { %>
-        <h2><%= item.quizTitle %></h2>
-            <li><%= item.title %> - <%= item.count %></li>
+      <h2><%= item.quizTitle %></h2>
+      <ul class="entry-list"></ul>
+      <li class="entry-item">
+        <% if (index % 2 === 0) { %>
+          <li class="entry-item even">
+        <% } else { %>
+          <li class="entry-item odd">
+        <% } %>
+        <span class="entry-name"><%= item.title %></span>
+        <span class="entry-count"><%= item.count %></span>
+      </li>
+    </ul>
     <% }) %>
+    </div>
 
-
-    <h3>Top 5 Most Difficult Quizzes</h3>
+    <div class="leaderboards-entry">
+    <h3><span class="entry-header">Most Difficult Quizzes</span></h3>
     <% mostDifficult.forEach((item, index) => { %>
-        <h2><%= item.quizTitle %></h2>
-            <li><%= item.title %></li>
+      <h2><%= item.quizTitle %></h2>
+      <ul class="entry-list"></ul>
+        <li class="entry-item">
+          <% if (index % 2 === 0) { %>
+            <li class="entry-item even">
+          <% } else { %>
+            <li class="entry-item odd">
+          <% } %>
+          <span class="entry-name"><%= item.title %></span>
+          <span class="entry-count"><%= item.avg_percentage %>%</span>
+        </li>
+      </ul>
     <% }) %>
+    </div>
 
-
-
-    <h3>Top 5 Most Active Quiz Users</h3>
+    <div class="leaderboards-entry">
+    <h3><span class="entry-header">Most Quizzes Taken</span></h3>
     <% mostTaken.forEach((item, index) => { %>
         <h2><%= item.quizTitle %></h2>
-            <li><%= item.name %> - <%= item.count %></li>
+        <ul class="entry-list"></ul>
+            <li class="entry-item">
+              <% if (index % 2 === 0) { %>
+                <li class="entry-item even">
+              <% } else { %>
+                <li class="entry-item odd">
+              <% } %>
+              <span class="entry-name"><%= item.name %></span>
+              <span class="entry-count"><%= item.count %></span>
+            </li>
+        </ul>
     <% }) %>
+    </div>
 
 
-    <h3>Top 5 Most Active Quiz Creators</h3>
+    <div class="leaderboards-entry">
+    <h3><span class="entry-header">Most Quizzes Created</span></h3>
     <% mostCreated.forEach((item, index) => { %>
         <h2><%= item.quizTitle %></h2>
-            <li><%= item.name %> - <%= item.count %></li>
+        <ul class="entry-list"></ul>
+            <li class="entry-item">
+              <% if (index % 2 === 0) { %>
+                <li class="entry-item even">
+              <% } else { %>
+                <li class="entry-item odd">
+              <% } %>
+              <span class="entry-name"><%= item.name %></span>
+              <span class="entry-count"><%= item.count %></span>
+            </li>
+        </ul>
     <% }) %>
 
+    </div>
   </div>
 
 </body>

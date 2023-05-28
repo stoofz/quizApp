@@ -41,6 +41,7 @@
     <form action="/quiz/<%= quizId %>" method="post">
       <% questions.forEach((question, index) => { %>
         <div class="question-box">
+
           <div class="question-header">
           <h3>Question #<%= index + 1 %></h3>
           </div>
@@ -49,7 +50,7 @@
           </div>
           <ul class="answer-box">
             <% question.answers.forEach((answer) => { %>
-              <li class="answer-box">
+              <li class="answer-list">
                 <button type="button" value="<%= answer %>" onclick="selectAnswer(this, '<%= index %>')">
                   <%= answer %>
                 </button>

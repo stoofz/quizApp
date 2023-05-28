@@ -1,3 +1,7 @@
+.quiz-header {
+  margin: 1.5em;
+}
+
 .quiz-container {
   display: flex;
   flex-direction: column;
@@ -14,7 +18,16 @@
   padding: 15px;
   border-radius: 8px;
   margin: 3em;
+}
 
+.question-header {
+  margin: 0.5em;
+  color: #007bff;
+  border-bottom: 1px solid #495057;
+}
+
+.question {
+  margin: 2em;
 }
 
 .answer-box {
@@ -64,25 +77,9 @@ ul.answer-box {
   font-size: 16px;
   border-radius: 8px;
   font-size: 20px;
-
 }
 
 .quiz-container .submit-button:hover {
   background-color: #007bff;
   cursor: pointer;
-}
-
-.question-header {
-  font-weight: bold;
-  margin: 0.5em;
-  color: #007bff;
-  border-bottom: 1px solid #495057;
-}
-
-.question {
-  margin: 2em;
-}
-
-.quiz-header {
-  margin: 1.5em;
 }
