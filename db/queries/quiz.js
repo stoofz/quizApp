@@ -11,11 +11,11 @@ const createQuizArray = function(quizResultId) {
   JOIN (
     SELECT quiz_answers.quiz_answer_id, quiz_answers.answer, quiz_answers.correct
     FROM quiz_answers
-    GROUP BY quiz_answers.quiz_answer_id, quiz_answers.answer, quiz_answers.correct)
+    GROUP BY quiz_answers.quiz_answer_id, quiz_answers.answer, quiz_answers.correct, quiz_answers.id
+  	ORDER BY quiz_answers.id)
     AS quiz_answers on quiz_questions.id = quiz_answers.quiz_answer_id
   WHERE quizzes.id = $1
-  GROUP BY quizzes.quiz_owner_id, quizzes.title, quiz_questions.question, quiz_questions.id
-  ORDER BY quiz_questions.id;`,
+  GROUP BY quizzes.quiz_owner_id, quizzes.title, quiz_questions.question, quiz_questions.id;`,
   [quizResultId]).then(data => {
     return data.rows;
   });
