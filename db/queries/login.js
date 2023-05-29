@@ -10,7 +10,7 @@ const validUserCheck = function(userId) {
       return data.rows[0].exists;
     })
     .catch(error => {
-      console.log(error);
+      console.error(error);
     });
 };
 

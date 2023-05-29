@@ -21,7 +21,7 @@ const createQuizArray = function(quizResultId) {
     return data.rows;
   })
     .catch(error => {
-      console.log(error);
+      console.error(error);
     });
 };
 
@@ -37,7 +37,7 @@ const insertQuizAttempt = function(quizId, userId, quizScore) {
       return data.rows;
     })
     .catch(error => {
-      console.log(error);
+      console.error(error);
     });
 };
 
@@ -55,7 +55,7 @@ const loadCorrectAnswers = function(quizId) {
       return data.rows;
     })
     .catch(error => {
-      console.log(error);
+      console.error(error);
     });
 };
 
@@ -71,7 +71,7 @@ const findAnswerId = function(submittedAnswer) {
       return data.rows;
     })
     .catch(error => {
-      console.log(error);
+      console.error(error);
     });
 };
 
@@ -85,7 +85,7 @@ const insertUserAnswer = function(quizResultId, answerId) {
       return data.rows;
     })
     .catch(error => {
-      console.log(error);
+      console.error(error);
     });
 };
 
@@ -100,7 +100,7 @@ const addQuizResult = function(quizResultId, userId, qId, score) {
       return data.rows;
     })
     .catch(error => {
-      console.log(error);
+      console.error(error);
     });
 };
 
@@ -115,7 +115,7 @@ const quizExistCheck = function(quizId) {
       return data.rows[0].exists;
     })
     .catch(error => {
-      console.log(error);
+      console.error(error);
     });
 };
 

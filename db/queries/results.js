@@ -15,7 +15,7 @@ const getQuestionsCorrectAnswers = function(quizResultId) {
     return data.rows;
   })
     .catch(error => {
-      console.log(error);
+      console.error(error);
     });
 };
 
@@ -30,7 +30,7 @@ const getUserProvidedAnswers = function(quizResultId) {
     return data.rows;
   })
     .catch(error => {
-      console.log(error);
+      console.error(error);
     });
 };
 
