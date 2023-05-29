@@ -62,9 +62,10 @@ const loadCorrectAnswers = function(quizId) {
 // Find answer id from submitted answer
 const findAnswerId = function(submittedAnswer) {
   return db.query(`
-  SELECT id
+  SELECT quiz_answers.id
   FROM quiz_answers
-  WHERE answer = $1;`, [submittedAnswer])
+  JOIN quiz_questions ON quiz_questions.id = quiz_answers.quiz_answer_id
+  WHERE answer = $1 AND quiz_questions.id = quiz_answer_id;`, [submittedAnswer])
     .then(data => {
       return data.rows;
     })
