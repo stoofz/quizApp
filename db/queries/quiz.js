@@ -18,7 +18,10 @@ const createQuizArray = function(quizResultId) {
   GROUP BY quizzes.quiz_owner_id, quizzes.title, quiz_questions.question, quiz_questions.id;`,
   [quizResultId]).then(data => {
     return data.rows;
-  });
+  })
+    .catch(error => {
+      console.log(error);
+    });
 };
 
 
@@ -31,6 +34,9 @@ const insertQuizAttempt = function(quizId, userId, quizScore) {
   RETURNING id;`, [quizId, userId, quizScore])
     .then(data => {
       return data.rows;
+    })
+    .catch(error => {
+      console.log(error);
     });
 };
 
@@ -46,6 +52,9 @@ const loadCorrectAnswers = function(quizId) {
   ORDER BY quiz_questions.id;`, [quizId])
     .then(data => {
       return data.rows;
+    })
+    .catch(error => {
+      console.log(error);
     });
 };
 
@@ -58,6 +67,9 @@ const findAnswerId = function(submittedAnswer) {
   WHERE answer = $1;`, [submittedAnswer])
     .then(data => {
       return data.rows;
+    })
+    .catch(error => {
+      console.log(error);
     });
 };
 
@@ -69,6 +81,9 @@ const insertUserAnswer = function(quizResultId, answerId) {
   VALUES ($1, $2);`, [quizResultId, answerId])
     .then(data => {
       return data.rows;
+    })
+    .catch(error => {
+      console.log(error);
     });
 };
 
@@ -81,6 +96,9 @@ const addQuizResult = function(quizResultId, userId, qId, score) {
   WHERE id = $1;`, [quizResultId, userId, qId, score])
     .then(data => {
       return data.rows;
+    })
+    .catch(error => {
+      console.log(error);
     });
 };
 
@@ -93,6 +111,9 @@ const quizExistCheck = function(quizId) {
   WHERE id = $1);`, [quizId])
     .then(data => {
       return data.rows[0].exists;
+    })
+    .catch(error => {
+      console.log(error);
     });
 };
 

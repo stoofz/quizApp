@@ -8,6 +8,9 @@ const validUserCheck = function(userId) {
   WHERE id = $1);`, [userId])
     .then(data => {
       return data.rows[0].exists;
+    })
+    .catch(error => {
+      console.log(error);
     });
 };
 

@@ -12,6 +12,9 @@ const mostCreated = function() {
   )
     .then(data => {
       return data.rows;
+    })
+    .catch(error => {
+      console.log(error);
     });
 };
 
@@ -26,6 +29,9 @@ const mostTaken = function() {
   LIMIT 5;`)
     .then(data => {
       return data.rows;
+    })
+    .catch(error => {
+      console.log(error);
     });
 };
 
@@ -40,6 +46,9 @@ const mostPopular = function() {
   LIMIT 5;`)
     .then(data => {
       return data.rows;
+    })
+    .catch(error => {
+      console.log(error);
     });
 };
 
@@ -56,6 +65,9 @@ const mostDifficult = function() {
   LIMIT 5;;`)
     .then(data => {
       return data.rows;
+    })
+    .catch(error => {
+      console.log(error);
     });
 };
 
