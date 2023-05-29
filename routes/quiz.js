@@ -49,84 +49,56 @@ router.get('/:quiz_id', (req, res) => {
 
 
 // End point to handle quiz submission
-router.post('/:quiz_id', (req, res) => {
-  validUserCheck(req.session.userId)
-    .then(validUser => {
-      if (!validUser) {
-        res.status(401).send('Must be logged in to submit a quiz');
-        return;
+router.post('/:quiz_id', async(req, res) => {
+  try {
+    const validUser = await validUserCheck(req.session.userId);
+    if (!validUser) {
+      res.status(401).send('Must be logged in to submit a quiz');
+      return;
+    }
+
+    const quizId = req.params.quiz_id;
+    const userId = req.session.userId;
+
+    let score = 0;
+    let answerId = null;
+    let quizResultId = 0;
+
+    const quizAttemptData = await insertQuizAttempt(quizId, userId, score);
+    quizResultId = quizAttemptData[0].id;
+
+    const correctAnswersData = await loadCorrectAnswers(quizId);
+    const submittedAnswers = req.body.a;
+
+    for (let i = 0; i < correctAnswersData.length; i++) {
+      const answerData = await findAnswerId(submittedAnswers[`${i}`]);
+      //console.log(answerData[0]);
+      if (answerData[0] === undefined) {
+        answerId = null;
+      } else {
+        answerId = answerData[0].id;
+        //console.log(answerId);
+      }
+      try {
+        await insertUserAnswer(quizResultId, answerId);
+      } catch (err) {
+        console.error('Error inserting user answer: ', err);
+        res.status(500).send('Internal Server Error');
       }
 
-      const quizId = req.params.quiz_id;
-      const userId = req.session.userId;
+      if (correctAnswersData[i].answer === submittedAnswers[`${i}`]) {
+        score++;
+      }
+    }
 
-      let score = 0;
-      let answerId = null;
-      let quizResultId = 0;
-
-      insertQuizAttempt(quizId, userId, score)
-        .then(quizAttemptData => {
-          quizResultId = quizAttemptData[0].id;
-
-          loadCorrectAnswers(quizId)
-            .then(correctAnswersData => {
-              const submittedAnswers = req.body.a;
-
-              const promises = [];
-              for (let i = 0; i < correctAnswersData.length; i++) {
-                promises.push(
-                  findAnswerId(submittedAnswers[`${i}`])
-                    .then(answerData => {
-                      if (answerData[0] === undefined) {
-                        answerId = null;
-                      } else {
-                        answerId = answerData[0].id;
-                      }
-                      return insertUserAnswer(quizResultId, answerId)
-                        .catch(err => {
-                          console.error('Error inserting answer_id to user_answer table: ', err);
-                          res.status(500).send('Internal Server Error');
-                        })
-                        .then(() => {
-                          if (correctAnswersData[i].answer === submittedAnswers[`${i}`]) {
-                            score++;
-                          }
-                        });
-                    })
-                );
-              }
-
-              Promise.all(promises)
-                .then(() => {
-                  addQuizResult(quizResultId, userId, quizId, score)
-                    .then(() => {
-                      res.redirect(302, `/result/${quizResultId}`);
-                    })
-                    .catch(err => {
-                      console.error('Error adding quiz result: ', err);
-                      res.status(500).send('Internal Server Error');
-                    });
-                })
-                .catch(err => {
-                  console.error('Error:', err);
-                  res.status(500).send('Internal Server Error');
-                });
-            })
-            .catch(err => {
-              console.error('Error loading correct answers: ', err);
-              res.status(500).send('Internal Server Error');
-            });
-        })
-        .catch(err => {
-          console.error('Error inserting quiz attempt: ', err);
-          res.status(500).send('Internal Server Error');
-        });
-    })
-    .catch(err => {
-      console.error('Error checking if user is valid: ', err);
-      res.status(500).send('Internal Server Error');
-    });
+    await addQuizResult(quizResultId, userId, quizId, score);
+    res.redirect(302, `/result/${quizResultId}`);
+  } catch (err) {
+    console.error('Error:', err);
+    res.status(500).send('Internal Server Error');
+  }
 });
+
 
 
 module.exports = router;
