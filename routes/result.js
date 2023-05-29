@@ -22,6 +22,7 @@ router.get('/:quizResultId', (req, res) => {
       // Find the provided user answers
       getUserProvidedAnswers(req.params.quizResultId)
         .then(providedAnswersData => {
+
           if (providedAnswersData === null) {
             templateVars.answers = [];
           } else {
