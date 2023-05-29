@@ -15,7 +15,8 @@ const createQuizArray = function(quizResultId) {
   	ORDER BY quiz_answers.id)
     AS quiz_answers on quiz_questions.id = quiz_answers.quiz_answer_id
   WHERE quizzes.id = $1
-  GROUP BY quizzes.quiz_owner_id, quizzes.title, quiz_questions.question, quiz_questions.id;`,
+  GROUP BY quizzes.quiz_owner_id, quizzes.title, quiz_questions.question, quiz_questions.id
+  ORDER BY quiz_questions.id;`,
   [quizResultId]).then(data => {
     return data.rows;
   })
