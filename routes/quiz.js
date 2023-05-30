@@ -32,7 +32,7 @@ router.get('/:quiz_id', async(req, res) => {
     res.render('../views/quiz', templateVars);
   } catch (err) {
     console.error('Error:', err);
-    res.status(500).send('Internal Server Error');
+    res.redirect(302, `/error?message=${encodeURIComponent('Internal Server Error')}`);
   }
 });
 
@@ -83,7 +83,7 @@ router.post('/:quiz_id', async(req, res) => {
     res.redirect(302, `/result/${quizResultId}`);
   } catch (err) {
     console.error('Error:', err);
-    res.status(500).send('Internal Server Error');
+    res.redirect(302, `/error?message=${encodeURIComponent('Internal Server Error')}`);
   }
 });
 

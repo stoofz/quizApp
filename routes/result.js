@@ -27,7 +27,7 @@ router.get('/:quizResultId', async(req, res) => {
     res.render('../views/result', templateVars);
   } catch (err) {
     console.error('Error loading quiz result: ', err);
-    res.status(500).send('Internal Server Error');
+    res.redirect(302, `/error?message=${encodeURIComponent('Internal Server Error')}`);
   }
 });
 module.exports = router;

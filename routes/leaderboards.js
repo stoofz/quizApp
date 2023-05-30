@@ -28,7 +28,7 @@ router.get('/', async(req, res) => {
     res.render('../views/leaderboards', templateVars);
   } catch (err) {
     console.error('Error : ', err);
-    res.status(500).send('Internal Server Error');
+    res.redirect(302, `/error?message=${encodeURIComponent('Internal Server Error')}`);
   }
 });
 

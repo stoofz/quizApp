@@ -22,16 +22,21 @@ router.post('/register', async(req, res) => {
 
     const userInfo = await userExists(req.body.email);
     if (userInfo) {
-      res.status(401).send('Email already exists');
+      res.redirect(302, `/error?message=${encodeURIComponent('Email already registered')}`);
       return;
     }
 
     const hashedPassword = bcrypt.hashSync(req.body.password, 10);
     await addUser(req.body.name, hashedPassword, req.body.email);
+
+    const createdUser = await userExists(req.body.email);
+    req.session.userId = createdUser.id;
+
     res.redirect(302, "/");
+
   } catch (err) {
     console.error('Error adding user: ', err);
-    res.status(500).send('Internal Server Error');
+    res.redirect(302, `/error?message=${encodeURIComponent('Internal Server Error')}`);
   }
 });
 
@@ -46,7 +51,7 @@ router.get('/register', async(req, res) => {
     res.render('register');
   } catch (err) {
     console.error('Error: ', err);
-    res.status(500).send('Internal Server Error');
+    res.redirect(302, `/error?message=${encodeURIComponent('Internal Server Error')}`);
   }
 });
 
@@ -62,7 +67,7 @@ router.get('/login', async(req, res) => {
     res.render('login');
   } catch (err) {
     console.error('Error: ', err);
-    res.status(500).send('Internal Server Error');
+    res.redirect(302, `/error?message=${encodeURIComponent('Internal Server Error')}`);
   }
 });
 
@@ -71,7 +76,7 @@ router.post('/login', async(req, res) => {
   try {
     const userInfo = await userExists(req.body.email);
     if (!userInfo) {
-      res.status(401).send('Invalid login');
+      res.redirect(302, `/error?message=${encodeURIComponent('Invalid Login')}`);
       return;
     }
 
@@ -80,11 +85,11 @@ router.post('/login', async(req, res) => {
       req.session.userId = userInfo.id;
       res.redirect(302, '/');
     } else {
-      res.status(401).send('Invalid login');
+      res.redirect(302, `/error?message=${encodeURIComponent('Invalid Login')}`);
     }
   } catch (err) {
     console.error('Error: ', err);
-    res.status(500).send('Internal Server Error');
+    res.redirect(302, `/error?message=${encodeURIComponent('Internal Server Error')}`);
   }
 });
 
