@@ -21,4 +21,18 @@ const addUser = function(userName, hashedPassword, email) {
     });
 };
 
-module.exports = { getUsers, addUser };
+const userExists = function(email) {
+  return db.query(
+    `SELECT * FROM users
+    WHERE email = $1;
+    `,
+    [email])
+    .then(data => {
+      return data.rows[0];
+    })
+    .catch(error => {
+      console.error(error);
+    });
+};
+
+module.exports = { getUsers, addUser, userExists };
