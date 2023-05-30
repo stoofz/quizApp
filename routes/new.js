@@ -56,7 +56,10 @@ router.post('/', (req, res) => {
 
   createNewQuiz(userId, title, question, answers, correctAnswer);
   console.log("quiz created");
-  res.redirect('/home');
+
+  //NEED TO FORCE PAGE TO REFRESH.
+  //jquery ON submit, windows.reload etc
+  res.redirect('/');
 });
 
 module.exports = router;
