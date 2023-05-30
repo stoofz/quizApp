@@ -25,6 +25,11 @@
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
 
+  <style>
+    .card-container {
+      margin-bottom: 20px; /* Adjust the value as per your requirement */
+    }
+  </style>
 </head>
 
 <body>
@@ -43,12 +48,12 @@
         <div class="container">
           <div class="row">
             <% results.forEach(result => { %>
-            <div class="col-lg-4">
+            <div class="col-lg-4 card-container">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title"><%= result.title %></h5>
                   <p class="card-text">
-                    <%= result.quiz_result %>
+                    Result: <%= result.quiz_result %>
                   </p>
                 </div>
               </div>
