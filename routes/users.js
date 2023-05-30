@@ -10,6 +10,7 @@ const router = express.Router();
 
 const bcrypt = require('bcrypt');
 const db = require('../db/connection');
+const { addUser } = require('../db/queries/users');
 
 
 router.get('/', (req, res) => {
@@ -17,12 +18,15 @@ router.get('/', (req, res) => {
 });
 
 // Post endpoint to add a new user to the database, bcrypts the password
-router.post('/register', (req, res) => {
-  const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-  db.query(
-    'INSERT INTO users (name, password, email) VALUES ($1, $2, $3)',
-    [req.body.name, hashedPassword, req.body.email]);
-  res.redirect(302, "/");
+router.post('/register', async(req, res) => {
+  try {
+    const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+    await addUser(req.body.name, hashedPassword, req.body.email);
+    res.redirect(302, "/");
+  } catch (err) {
+    console.error('Error adding user: ', err);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 // End point to serve registration page
