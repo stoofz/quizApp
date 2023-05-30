@@ -13,7 +13,10 @@ const getQuestionsCorrectAnswers = function(quizResultId) {
     ORDER BY quiz_questions.id;
     `, [quizResultId]).then(data => {
     return data.rows;
-  });
+  })
+    .catch(error => {
+      console.error(error);
+    });
 };
 
 // Find the answers provided by the user for a quiz by quiz_attempt_id
@@ -25,7 +28,10 @@ const getUserProvidedAnswers = function(quizResultId) {
   WHERE user_answers.quiz_attempt_id = $1
   `, [quizResultId]).then(data => {
     return data.rows;
-  });
+  })
+    .catch(error => {
+      console.error(error);
+    });
 };
 
 module.exports = { getQuestionsCorrectAnswers, getUserProvidedAnswers };
