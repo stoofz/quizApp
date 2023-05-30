@@ -2,7 +2,7 @@ const db = require('../connection');
 
 
 // Aggregates question answer choices into an array inside of question object
-const createQuizArray = function(quizResultId) {
+const createQuizArray = function(quizId) {
   return db.query(`
   SELECT quizzes.quiz_owner_id, quizzes.title, quiz_questions.question, array_agg(quiz_answers.answer) AS answers
   FROM quizzes
@@ -17,7 +17,7 @@ const createQuizArray = function(quizResultId) {
   WHERE quizzes.id = $1
   GROUP BY quizzes.quiz_owner_id, quizzes.title, quiz_questions.question, quiz_questions.id
   ORDER BY quiz_questions.id;`,
-  [quizResultId]).then(data => {
+  [quizId]).then(data => {
     return data.rows;
   })
     .catch(error => {
