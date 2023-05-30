@@ -17,7 +17,7 @@ router.get('/:quiz_id', async(req, res) => {
     // Check if a quiz exists with the param id
     const quizExists = await quizExistCheck(req.params.quiz_id);
     if (!quizExists) {
-      res.redirect('/');
+      res.redirect(302, `/error?message=${encodeURIComponent('Quiz does not exist')}`);
       return;
     }
 
