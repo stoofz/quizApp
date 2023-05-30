@@ -22,7 +22,7 @@ router.post('/register', (req, res) => {
   db.query(
     'INSERT INTO users (name, password, email) VALUES ($1, $2, $3)',
     [req.body.name, hashedPassword, req.body.email]);
-  res.redirect(302, "/home");
+  res.redirect(302, "/");
 });
 
 // End point to serve registration page
@@ -53,7 +53,7 @@ router.post('/login', (req, res) => {
       const validPassword = bcrypt.compareSync(req.body.password, user.password);
       if (validPassword) {
         req.session.userId = user.id;
-        res.redirect(302, '/home');
+        res.redirect(302, '/');
       } else {
         res.status(401).send('Invalid login');
       }

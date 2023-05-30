@@ -17,7 +17,7 @@ router.get('/:quiz_id', async(req, res) => {
     // Check if a quiz exists with the param id
     const quizExists = await quizExistCheck(req.params.quiz_id);
     if (!quizExists) {
-      res.redirect('/home');
+      res.redirect('/');
       return;
     }
 
@@ -65,12 +65,10 @@ router.post('/:quiz_id', async(req, res) => {
     for (let i = 0; i < correctAnswersData.length; i++) {
       // Find submitted answers id
       const answerData = await findAnswerId(submittedAnswers[`${i}`]);
-      //console.log(answerData[0]);
       if (answerData[0] === undefined) {
         answerId = null;
       } else {
         answerId = answerData[0].id;
-        //console.log(answerId);
       }
 
       await insertUserAnswer(quizResultId, answerId);

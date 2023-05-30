@@ -54,7 +54,7 @@ app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 
 app.use('/users', usersRoutes);
-app.use("/home", homeRoutes);
+app.use("/", homeRoutes);
 app.use("/quiz", quizRoutes);
 app.use("/result", resultRoutes);
 app.use("/new", newQuizRoutes);

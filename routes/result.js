@@ -6,12 +6,8 @@ const { getQuestionsCorrectAnswers, getUserProvidedAnswers } = require('../db/qu
 router.get('/:quizResultId', async(req, res) => {
   try {
 
-    // Check if quiz results exists, if so set data
+    // Get the correct answers for the quiz
     const data = await getQuestionsCorrectAnswers(req.params.quizResultId);
-    if (data.length === 0) {
-      res.redirect('/home');
-      return;
-    }
 
     const templateVars = {
       quizzes: data,
@@ -21,8 +17,6 @@ router.get('/:quizResultId', async(req, res) => {
 
     // Assemble answers provided by user
     const providedAnswersData = await getUserProvidedAnswers(req.params.quizResultId);
-
-    //console.log('providedAnswersData: ', providedAnswersData);
 
     if (providedAnswersData === null) {
       templateVars.answers = [];
