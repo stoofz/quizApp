@@ -11,6 +11,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const db = require('../db/connection');
 const { addUser } = require('../db/queries/users');
+const { validUserCheck } = require('../db/queries/login');
 
 
 router.get('/', (req, res) => {
@@ -30,14 +31,34 @@ router.post('/register', async(req, res) => {
 });
 
 // End point to serve registration page
-router.get('/register', (req, res) => {
-  res.render('register');
+router.get('/register', async(req, res) => {
+  try {
+    const validUser = await validUserCheck(req.session.userId);
+    if (validUser) {
+      res.redirect(302, '/');
+      return;
+    }
+    res.render('register');
+  } catch (err) {
+    console.error('Error: ', err);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 
 // Serve login page
-router.get('/login', (req, res) => {
-  res.render('login');
+router.get('/login', async(req, res) => {
+  try {
+    const validUser = await validUserCheck(req.session.userId);
+    if (validUser) {
+      res.redirect(302, '/');
+      return;
+    }
+    res.render('login');
+  } catch (err) {
+    console.error('Error: ', err);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 // Post login credentials and check if they are valid

@@ -1,9 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const { mostPopular, mostTaken, mostCreated, mostDifficult } = require('../db/queries/leaderboards');
+const { validUserCheck } = require('../db/queries/login');
 
 router.get('/', async(req, res) => {
   try {
+
+    const validUser = await validUserCheck(req.session.userId);
+    if (!validUser) {
+      res.redirect('/users/login');
+      return;
+    }
+
     // Assemble data for leaderboards
     const dataPopular = await mostPopular();
     const dataDifficult = await mostDifficult();
@@ -19,8 +27,8 @@ router.get('/', async(req, res) => {
 
     res.render('../views/leaderboards', templateVars);
   } catch (err) {
-    console.error('Error generating leaderboards: ', err);
-    res.status(500).send('Error generating leaderboards');
+    console.error('Error : ', err);
+    res.status(500).send('Internal Server Error');
   }
 });
 
