@@ -20,7 +20,6 @@ router.get('/:user_id', (req, res) => {
     })
     .then((user) => {
       const userId = req.params.user_id;
-
       // Fetch quiz history for the user
       getQuizHistoryforUser(userId)
         .then(data => {
