@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <title>Quiz History</title>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,7 +34,7 @@
   <%- include('partials/_header') %>
 
   <div class="content">
-    <h1>Your Quiz Attempts:</h1>
+    <h1>Your Quiz Attempts: <%= totalAttempts %></h1>
   </div>
 
   <div class="card-container">
@@ -46,9 +46,14 @@
           <div class="col-lg-4">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title"><%= result.title %></h5>
+                <h5 class="card-title">
+                  <a href="../result/<%= result.id %>"><%= result.title %></a>
+                </h5>
                 <p class="card-text">
-                  Result: <%= result.quiz_result %>
+                  Result: <%= result.quiz_result %> / <%= result.total_questions %>
+                </p>
+                <p class="card-text">
+                  Score: <%= result.avg_percentage %>%
                 </p>
               </div>
             </div>

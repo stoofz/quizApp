@@ -2,11 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { getQuizHistoryforUser } = require('../db/queries/quizhistory');
 const { validUserCheck } = require('../db/queries/login');
-const { getUserById } = require('../db/queries/userinfo.js')
+const { getUserById } = require('../db/queries/userinfo.js');
 
 // Display quiz history for a specific user
 router.get('/:user_id', (req, res) => {
-  console.log('test');
   // Check if user is logged in with valid user id
   validUserCheck(req.session.userId)
     .then(exists => {
@@ -24,13 +23,20 @@ router.get('/:user_id', (req, res) => {
       getQuizHistoryforUser(userId)
         .then(data => {
           if (data.length === 0) {
-            res.render('../views/quizhistory', { results: [] }, user); // Empty array for no quiz results
+            res.render('../views/quizhistory', {
+              results: [],
+              totalAttempts: 0,
+              user
+            }); // Empty array for no quiz results
           } else {
-
             // Add user object for _header.ejs conditionals
-            const templateVars = { results: data, user};
+            const templateVars = {
+              results: data,
+              totalAttempts: data.length,
+              user
+            };
             res.render('../views/quizhistory', templateVars);
-            
+
           }
         })
         .catch(err => {
