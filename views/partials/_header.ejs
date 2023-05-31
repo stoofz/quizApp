@@ -16,7 +16,10 @@
       <div class="navbar-nav mr-auto">
         <a class="nav-item nav-link" href="/new">Create New Quiz</a>
         <a class="nav-item nav-link" href="/leaderboards">Leaderboards</a>
-        <a class="nav-item nav-link" href="/quizhistory/<%= user.id %>">Quiz History</a>
+        
+        <% if (user) { %>
+          <a class="nav-item nav-link" href="/quizhistory/<%= user.id %>">Quiz History</a>
+        <% } %>
 
       </div>
     </div>
