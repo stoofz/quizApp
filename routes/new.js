@@ -20,7 +20,6 @@ router.get('/', async (req, res) => {
 
   try {
     const userInfo = await getUserInfo(req.session.userId);
-    console.log(userInfo);
     const templateVars = {
       userInfo,
     };
