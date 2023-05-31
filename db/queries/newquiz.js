@@ -55,7 +55,6 @@ const createNewQuiz = function (userId, quizTitle, question, answers, correctAns
 
         createQuestion(quizId, question)
           .then(questionData => {
-            console.log('question object--->', questionData);
             // This block of code is executed when the createQuestion promise is resolved successfully.
             const questionId = questionData.id;
             const answerPromises = [];
@@ -67,7 +66,6 @@ const createNewQuiz = function (userId, quizTitle, question, answers, correctAns
 
             Promise.all(answerPromises)
               .then(answers => {
-                console.log('answers object ---->', answers);
                 questionData.answers = answers;
                 resolve(questionData); // Resolve with the final questionData
               })

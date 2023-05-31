@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
   try {
     const user = await getUserById(req.session.userId);
     const templateVars = {
-      user,
+      user
     };
     res.render('../views/new_quiz',templateVars);
 
@@ -61,13 +61,7 @@ router.post('/', (req, res) => {
     correctAnswer = option4;
   }
 
-  console.log(correctAnswer);
-  console.log('Quiz submitted sucessfully!');
-  console.log(submission);
-  console.log(userId);
-
   createNewQuiz(userId, title, question, answers, correctAnswer);
-  console.log("quiz created");
 
   //NEED TO FORCE PAGE TO REFRESH.
   //jquery ON submit, windows.reload etc
