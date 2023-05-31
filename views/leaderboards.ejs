@@ -50,8 +50,10 @@
         <% } else { %>
           <li class="entry-item odd">
         <% } %>
-        <span class="entry-name"><%= item.title %></span>
+
+        <span class="entry-name"><a href="../quiz/<%= item.id %>"><%= item.title %></a></span>
         <span class="entry-count"><%= item.count %></span>
+
       </li>
     </ul>
     <% }) %>
@@ -68,7 +70,7 @@
           <% } else { %>
             <li class="entry-item odd">
           <% } %>
-          <span class="entry-name"><%= item.title %></span>
+          <span class="entry-name"><a href="../quiz/<%= item.id %>"><%= item.title %></a></span>
           <span class="entry-count"><%= item.avg_percentage %>%</span>
         </li>
       </ul>
