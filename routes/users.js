@@ -48,7 +48,7 @@ router.get('/register', async(req, res) => {
       res.redirect(302, '/');
       return;
     }
-    res.render('register');
+    res.render('register', { user: req.user });
   } catch (err) {
     console.error('Error: ', err);
     res.redirect(302, `/error?message=${encodeURIComponent('Internal Server Error')}`);
