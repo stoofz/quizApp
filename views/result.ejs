@@ -37,7 +37,6 @@
 
   <div class="quiz-container">
     <h2><%= quizTitle %></h2>
-
       <div class = "result-box">
           <% quizzes.forEach((quiz, index) => { %>
             <div class="question-box">
@@ -75,9 +74,18 @@
           <% }); %>
 
         <div class="result-display">
-        <h3>Result</h3>
-        <span class="result-score"><%= quizResult %> / <%= quizzes.length %></span>
+          <h3>Result</h3>
+          <span class="result-score"><%= quizResult %> / <%= quizzes.length %></span>
+
+          <div class="result-share">
+            Share your results @
+            <a href="<%= `${req.protocol}://${req.get('host')}/result/${req.params.quizResultId}` %>">
+              <%=`${req.protocol}://${req.get('host')}/result/${req.params.quizResultId}`%>
+            </a>
+          </div>
         </div>
+
+
 
       </div>
 </div>
