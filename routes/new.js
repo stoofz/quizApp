@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
   try {
     const user = await getUserById(req.session.userId);
     const templateVars = {
-      user,
+      user
     };
     res.render('../views/new_quiz',templateVars);
 
@@ -33,10 +33,6 @@ router.get('/', async (req, res) => {
 
 router.post('/', (req, res) => {
 
-  /*
-    - add option for setting quiz to be public or private, edit db query accordingly
-  */
-
   // Assigning variables to the req.body content acquired from form submission.
   const submission = req.body;
   const userId = req.session.userId;
@@ -47,10 +43,10 @@ router.post('/', (req, res) => {
   const option2 = submission.option2;
   const option3 = submission.option3;
   const option4 = submission.option4;
-
   const answers = [option1, option2, option3, option4];
   let correctAnswer = submission.correctAnswer;
 
+  //Matching the correct answer with the options.
   if (correctAnswer === "option1") {
     correctAnswer = option1;
   } else if (correctAnswer === "option2") {
@@ -61,16 +57,11 @@ router.post('/', (req, res) => {
     correctAnswer = option4;
   }
 
-  console.log(correctAnswer);
-  console.log('Quiz submitted sucessfully!');
-  console.log(submission);
-  console.log(userId);
+  //Setting the privacy setting (t/f) for quiz.
+  let privacy = submission.privacySetting;
+  privacy = (privacy === 'public') ? 'TRUE' : 'FALSE';
+  createNewQuiz(userId, title, question, answers, correctAnswer, privacy);
 
-  createNewQuiz(userId, title, question, answers, correctAnswer);
-  console.log("quiz created");
-
-  //NEED TO FORCE PAGE TO REFRESH.
-  //jquery ON submit, windows.reload etc
   res.redirect('/');
 });
 

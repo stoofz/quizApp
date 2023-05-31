@@ -62,7 +62,7 @@ const mostDifficult = function() {
   GROUP BY title
   HAVING COUNT(quiz_attempts.quiz_id) >= 5
   ORDER BY avg_percentage ASC
-  LIMIT 5;;`)
+  LIMIT 5;`)
     .then(data => {
       return data.rows;
     })
