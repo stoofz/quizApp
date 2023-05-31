@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { createQuizArray, insertQuizAttempt, loadCorrectAnswers, findAnswerId, insertUserAnswer, addQuizResult, quizExistCheck } = require('../db/queries/quiz');
 const { validUserCheck } = require('../db/queries/login');
-
+const { getUserById } = require('../db/queries/userinfo.js')
 
 // Display quiz to be attempted based on params
 router.get('/:quiz_id', async(req, res) => {
@@ -17,16 +17,21 @@ router.get('/:quiz_id', async(req, res) => {
     // Check if a quiz exists with the param id
     const quizExists = await quizExistCheck(req.params.quiz_id);
     if (!quizExists) {
-      res.redirect('/');
+      res.redirect(302, `/error?message=${encodeURIComponent('Quiz does not exist')}`);
       return;
     }
 
     // Create an array of questions and answers for the quiz
     const quizData = await createQuizArray(req.params.quiz_id);
+
+    // Create object with user information for _header.ejs conditionals.
+    const user = await getUserById(req.session.userId);
+
     const templateVars = {
       questions: quizData,
       quizTitle: quizData[0].title,
-      quizId: req.params.quiz_id
+      quizId: req.params.quiz_id,
+      user
     };
 
     res.render('../views/quiz', templateVars);

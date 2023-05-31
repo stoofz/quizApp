@@ -9,15 +9,27 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/connection');
 const { createNewQuiz } = require('../db/queries/newquiz.js');
+const { getUserById } = require('../db/queries/userinfo.js')
 
-router.get('/', (req, res) => {
-  // const userId = req.session.userId;
-  // console.log(req.session);
+router.get('/', async (req, res) => {
 
-  res.render('../views/new_quiz');
+  //Provides access to the page only when user is logged in. 
+  if (!req.session.userId) {
+    return res.status(403).send(`Status code: ${res.statusCode} - ${res.statusMessage}. Please log in or register to get started.`);
+  }
+
+  try {
+    const user = await getUserById(req.session.userId);
+    const templateVars = {
+      user,
+    };
+    res.render('../views/new_quiz',templateVars);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred.');
+  }
 });
-
-//set up POST router.post for form submission, redirect to home page
 
 router.post('/', (req, res) => {
 
@@ -25,7 +37,7 @@ router.post('/', (req, res) => {
     - add option for setting quiz to be public or private, edit db query accordingly
   */
 
-  // Access the form data using req.body and user id through the session cookie.
+  // Assigning variables to the req.body content acquired from form submission.
   const submission = req.body;
   const userId = req.session.userId;
 

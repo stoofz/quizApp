@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { mostPopular, mostTaken, mostCreated, mostDifficult } = require('../db/queries/leaderboards');
 const { validUserCheck } = require('../db/queries/login');
+const { getUserById } = require('../db/queries/userinfo.js')
 
 router.get('/', async(req, res) => {
   try {
@@ -12,17 +13,21 @@ router.get('/', async(req, res) => {
       return;
     }
 
+    // Create object with user information for _header.ejs conditionals.
+    const user = await getUserById(req.session.userId);
+    
     // Assemble data for leaderboards
     const dataPopular = await mostPopular();
     const dataDifficult = await mostDifficult();
     const dataTaken = await mostTaken();
     const dataCreated = await mostCreated();
-
+    
     const templateVars = {
       mostPopular: dataPopular,
       mostDifficult: dataDifficult,
       mostTaken: dataTaken,
-      mostCreated: dataCreated
+      mostCreated: dataCreated,
+      user
     };
 
     res.render('../views/leaderboards', templateVars);
