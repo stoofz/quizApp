@@ -15,14 +15,20 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav mr-auto">
         <a class="nav-item nav-link" href="/new">Create New Quiz</a> 
-        <!-- <a class="nav-item nav-link" href="/users/library">My Library</a> -->
+        <a class="nav-item nav-link" href="/leaderboards">Leaderboards</a>
+
       </div>
     </div>
+
     <div class ="nav navbar-nav">
       
       <a class="nav-item nav-link" href="/users/register">Register</a>
       <a class="nav-item nav-link" href="/users/login">Log in</a>
 
+      <form method="POST" action="/logout">
+        <button type="submit" class="btn btn-dark">Logout</button>
+        </form> 
       </div>
+
   </nav>
 </header>
