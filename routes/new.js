@@ -9,7 +9,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/connection');
 const { createNewQuiz } = require('../db/queries/newquiz.js');
-const { getUserInfo} = require('../db/queries/userinfo.js')
+const { getUserById } = require('../db/queries/userinfo.js')
 
 router.get('/', async (req, res) => {
 
@@ -19,9 +19,9 @@ router.get('/', async (req, res) => {
   }
 
   try {
-    const userInfo = await getUserInfo(req.session.userId);
+    const user = await getUserById(req.session.userId);
     const templateVars = {
-      userInfo,
+      user,
     };
     res.render('../views/new_quiz',templateVars);
 

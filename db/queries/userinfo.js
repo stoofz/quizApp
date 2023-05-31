@@ -1,7 +1,7 @@
 const db = require('../connection');
 
 
-const getUserInfo = function(userId) {
+const getUserById = function(userId) {
   return new Promise((resolve, reject) => {
 
     const queryStr = `
@@ -21,4 +21,4 @@ const getUserInfo = function(userId) {
   });
 };
 
-module.exports = {getUserInfo};
+module.exports = {getUserById};

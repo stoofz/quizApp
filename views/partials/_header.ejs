@@ -22,9 +22,9 @@
 
     <div class ="nav navbar-nav">
       
-      <% if (userInfo) { %>
+      <% if (user) { %>
         <p></p>
-        <h6 class="mt-2 mr-3">Logged in as <%= userInfo.email %>!</h6>
+        <h6 class="mt-2 mr-3">Logged in as <%= user.email %>!</h6>
         <form action="/logout" method="POST">
           <button type="submit" class="btn btn-dark">Logout</button>
         </form>
