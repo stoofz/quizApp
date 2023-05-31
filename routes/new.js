@@ -9,20 +9,28 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/connection');
 const { createNewQuiz } = require('../db/queries/newquiz.js');
+const { getUserInfo} = require('../db/queries/userinfo.js')
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
 
   //Provides access to the page only when user is logged in. 
   if (!req.session.userId) {
     return res.status(403).send(`Status code: ${res.statusCode} - ${res.statusMessage}. Please log in or register to get started.`);
   }
 
-  const templateVars = {
-    user: req.session.user_id,
-  };
-  res.render('../views/new_quiz',templateVars);
-});
+  try {
+    const userInfo = await getUserInfo(req.session.userId);
+    console.log(userInfo);
+    const templateVars = {
+      userInfo,
+    };
+    res.render('../views/new_quiz',templateVars);
 
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred.');
+  }
+});
 
 router.post('/', (req, res) => {
 

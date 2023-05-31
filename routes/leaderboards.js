@@ -11,13 +11,13 @@ router.get('/', async(req, res) => {
       res.redirect('/users/login');
       return;
     }
-
+    
     // Assemble data for leaderboards
     const dataPopular = await mostPopular();
     const dataDifficult = await mostDifficult();
     const dataTaken = await mostTaken();
     const dataCreated = await mostCreated();
-
+    
     const templateVars = {
       mostPopular: dataPopular,
       mostDifficult: dataDifficult,
