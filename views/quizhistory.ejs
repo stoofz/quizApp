@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="/styles/layout.css">
   <link rel="stylesheet" href="/styles/nav.css" />
   <link rel="stylesheet" href="/styles/quizhistory.css" />
+  <link rel="stylesheet" href="/styles/leaderboards.css" />
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet"
@@ -33,20 +34,20 @@
   <!-- Header -->
   <%- include('partials/_header') %>
 
-  <div class="content">
+  <div class="leaderboards-header">
     <h1>Your Quiz Attempts: <%= totalAttempts %></h1>
   </div>
 
-  <div class="card-container">
+  <div class="leaderboards-container">
 
 
       <div class="container">
         <div class="row">
           <% results.forEach(result => { %>
           <div class="col-lg-4">
-            <div class="card">
+            <div class="leaderboards-entry">
               <div class="card-body">
-                <h5 class="card-title">
+                <h5 class="entry-header">
                   <a href="../result/<%= result.id %>"><%= result.title %></a>
                 </h5>
                 <p class="card-text">
