@@ -56,8 +56,6 @@ const createNewQuiz = async function(userId, quizTitle, generatorObj, privacy) {
 
     const quizId = data.rows[0].id;
 
-    const questionArray = [];
-
     //INSERT LOOP HERE, TO LOOP THROUGH QUESTIONS ARRAY.
 
     for (const questionNum in generatorObj["questions"]) {
@@ -74,12 +72,8 @@ const createNewQuiz = async function(userId, quizTitle, generatorObj, privacy) {
         answerPromises.push(insertAnswer(questionId, answer, isCorrect));
       }
 
-      const answers = await Promise.all(answerPromises);
-      questionData.answers = answers;
-      questionArray.push(questionData);
+      await Promise.all(answerPromises);
     }
-
-    return questionArray; // Resolve with the final questionData
 
   } catch (error) {
     console.error(error); // Reject if db.query promise is rejected
