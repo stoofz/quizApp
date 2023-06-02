@@ -14,10 +14,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav mr-auto">
+        <% if (user) { %>
         <a class="nav-item nav-link" href="/new">Create New Quiz</a>
         <a class="nav-item nav-link" href="/leaderboards">Leaderboards</a>
-        
-        <% if (user) { %>
           <a class="nav-item nav-link" href="/quizhistory/<%= user.id %>">Quiz History</a>
         <% } %>
 
