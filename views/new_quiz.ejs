@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/new-quiz.css" />
   <link rel="stylesheet" href="/styles/nav.css" />
+  <link rel="stylesheet" href="/styles/footer.scss" />
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -29,44 +30,140 @@
   <%- include('partials/_header') %>
 
     <div class="container">
-      <h2>Create New Quiz</h2>
-      <form action="/new" method="POST">
-        <label for="quiz-title">Quiz Title:</label>
+      <div id="container-header">
+        <h1>Quiz Generator</h1>
 
-        <input type="text" id="quiz-title" name="quizTitle" required>
+      </div>
 
-          <label for="question">Question 1:</label>
-          <input type="text" id="question" name="question" required>
+      <div id="question-answer-boxes">
+        <form action="/new" method="POST">
 
-          <label for="option1">Option 1:</label>
-          <input type="text" id="option1" name="option1" required>
+          <div id="quiz-title">
+            <label for="quiz-title">Quiz Title:</label>
+            <input type="text" id="quiz-title" name="quizTitle" required>
+          </div>
 
-          <label for="option2">Option 2:</label>
-          <input type="text" id="option2" name="option2" required>
 
-          <label for="option3">Option 3:</label>
-          <input type="text" id="option3" name="option3" required>
+          <div id="q1">
+            <label for="quest1">Question 1:</label>
+            <input type="text" id="quest1" name="quest1" required>
 
-          <label for="option4">Option 4:</label>
-          <input type="text" id="option4" name="option4" required>
+            <label for="q1a1">Option 1:</label>
+            <input type="text" id="q1a1" name="q1a1" required>
 
-          <label for="correct-answer">Correct Answer:</label>
-          <select id="correct-answer" name="correctAnswer" required>
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-            <option value="option4">Option 4</option>
-          </select>
+            <label for="q1a2">Option 2:</label>
+            <input type="text" id="q1a2" name="q1a2" required>
 
-          <label for="privacy">Privacy Setting:</label>
-          <select id="privacy" name="privacySetting" required>
-            <option value="public">Public</option>
-            <option value="private">Private</option>
-          </select>
+            <label for="q1a3">Option 3:</label>
+            <input type="text" id="q1a3" name="q1a3" required>
 
-          <button id="submitQuiz" type="submit">Submit Quiz</button>
+            <label for="q1a4">Option 4:</label>
+            <input type="text" id="q1a4" name="q1a4" required>
+
+            <label for="correct-answer1">Correct Answer:</label>
+            <select id="correct-answer1" name="correctAnswer1" required>
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+              <option value="option4">Option 4</option>
+            </select>
+          </div>
+
+          <br>
+
+          <div id="q2">
+            <label for="quest2">Question 2:</label>
+            <input type="text" id="quest2" name="quest2" required>
+
+            <label for="q2a1">Option 1:</label>
+            <input type="text" id="q2a1" name="q2a1" required>
+
+            <label for="q2a2">Option 2:</label>
+            <input type="text" id="q2a2" name="q2a2" required>
+
+            <label for="q2a3">Option 3:</label>
+            <input type="text" id="q2a3" name="q2a3" required>
+
+            <label for="q2a4">Option 4:</label>
+            <input type="text" id="q2a4" name="q2a4" required>
+
+            <label for="correct-answer2">Correct Answer:</label>
+            <select id="correct-answer2" name="correctAnswer2" required>
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+              <option value="option4">Option 4</option>
+            </select>
+          </div>
+
+          <br>
+
+          <!-- <div id="q3">
+            <label for="question">Question 3:</label>
+            <input type="text" id="quest3" name="quest3" required>
+
+            <label for="q3a1">Option 1:</label>
+            <input type="text" id="q3a1" name="q3a1" required>
+
+            <label for="q3a2">Option 2:</label>
+            <input type="text" id="q3a2" name="q3a2" required>
+
+            <label for="q3a3">Option 3:</label>
+            <input type="text" id="q3a3" name="q3a3" required>
+
+            <label for="q3a4">Option 4:</label>
+            <input type="text" id="q3a4" name="q3a4" required>
+
+            <label for="correct-answer3">Correct Answer:</label>
+            <select id="correct-answer3" name="correctAnswer3" required>
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+              <option value="option4">Option 4</option>
+            </select>
+          </div>
+          <br>
+          <div id="q4">
+            <label for="quest4">Question 4:</label>
+            <input type="text" id="quest4" name="quest4" required>
+
+            <label for="q4a1">Option 1:</label>
+            <input type="text" id="q4a1" name="q4a1" required>
+
+            <label for="q4a2">Option 2:</label>
+            <input type="text" id="q4a2" name="q4a2" required>
+
+            <label for="q4a3">Option 3:</label>
+            <input type="text" id="q4a3" name="q4a3" required>
+
+            <label for="q4a4">Option 4:</label>
+            <input type="text" id="q4a4" name="q4a4" required>
+
+            <label for="correct-answer4">Correct Answer:</label>
+            <select id="correct-answer4" name="correctAnswer4" required>
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+              <option value="option4">Option 4</option>
+            </select> -->
+
+          <br>
+
+          <div id="privacy">
+            <label for="privacy">Privacy Setting:</label>
+            <select id="privacy" name="privacySetting" required>
+              <option value="public">Public</option>
+              <option value="private">Private</option>
+            </select>
+          </div>
+          <div>
+            <button id="submitQuiz" type="submit">Submit Quiz</button>
+          </div>
+      </div>
 
       </form>
+    </div>
+
     </div>
 
 </body>

@@ -13,9 +13,9 @@ const selectAnswer = (button, index) => {
   userAnswer.val(button.value);
 };
 
-$(document).ready(function () {
-  $("#submitQuiz").submit(function(event){
-    event.preventDefault();
-})});
+// $(document).ready(function () {
+//   $("#submitQuiz").submit(function(event){
+//     event.preventDefault();
+// })});
 
 /* eslint-enable no-unused-vars */
