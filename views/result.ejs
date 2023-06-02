@@ -31,11 +31,13 @@
 
 <body>
   <%- include('partials/_header') %>
-  <div class="quiz-header">
-    <h1>🥔 Results</h1>
-    </div>
 
   <div class="quiz-container">
+
+    <div class="quiz-header">
+      <h1>🥔 Results</h1>
+      </div>
+
     <h2><%= quizTitle %></h2>
       <div class = "result-box">
           <% quizzes.forEach((quiz, index) => { %>

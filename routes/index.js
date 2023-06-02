@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { getPublicQuizzes } = require('../db/queries/index');
 const { validUserCheck } = require('../db/queries/login');
-const { getUserById } = require('../db/queries/userinfo.js')
+const { getUserById } = require('../db/queries/userinfo.js');
 
 // Display all public quizzes
 router.get('/', async(req, res) => {

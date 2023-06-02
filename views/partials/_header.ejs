@@ -1,40 +1,33 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark">
     <a class="navbar-brand" href="/">Quiz App</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-    <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav mr-auto">
         <% if (user) { %>
-        <a class="nav-item nav-link" href="/new">Create New Quiz</a>
-        <a class="nav-item nav-link" href="/leaderboards">Leaderboards</a>
+          <a class="nav-item nav-link" href="/new">Create New Quiz</a>
+          <a class="nav-item nav-link" href="/leaderboards">Leaderboards</a>
           <a class="nav-item nav-link" href="/quizhistory/<%= user.id %>">Quiz History</a>
-        <% } %>
+          <% } %>
 
       </div>
     </div>
 
-    <div class ="nav navbar-nav">
-      
+    <div class="nav navbar-nav">
+
       <% if (user) { %>
         <p></p>
-        <h6 class="mt-2 mr-3">Logged in as <%= user.email %>!</h6>
+        <h6 class="mt-2 mr-3">Logged in as <%= user.name %>!</h6>
         <form action="/logout" method="POST">
-          <button type="submit" class="btn btn-dark">Logout</button>
+          <button type="submit" class="btn btn-primary">Logout</button>
         </form>
-      <% } else { %>
-        <a class="nav-item nav-link" href="/users/register">Register</a>
-        <a class="nav-item nav-link" href="/users/login">Log in</a>
-      <% } %>
+        <% } else { %>
+          <a class="nav-item nav-link" href="/users/register">Register</a>
+          <a class="nav-item nav-link" href="/users/login">Log in</a>
+          <% } %>
     </div>
   </nav>
 </header>

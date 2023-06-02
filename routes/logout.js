@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { getUserInfo} = require('../db/queries/userinfo.js')
 
 // Clears session cookie
-router.post('/logout', async (req, res) => {
+router.post('/logout', async(req, res) => {
   try {
     req.session = null;
     res.clearCookie('session');
