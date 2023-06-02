@@ -1,7 +1,7 @@
 INSERT INTO quiz_questions (quiz_id, question) VALUES (1, 'What port is Secure Shell SSH?');
 INSERT INTO quiz_questions (quiz_id, question) VALUES (1, 'What port is Domain Name System DNS?');
-INSERT INTO quiz_questions (quiz_id, question) VALUES (1, 'What port is Hyper Text Transfer Protocol Secure HTTPS?');
-INSERT INTO quiz_questions (quiz_id, question) VALUES (1, 'What port is Simple Mail Transfer Protocol SMTP?');
+INSERT INTO quiz_questions (quiz_id, question) VALUES (1, 'What port is for HTTPS?');
+INSERT INTO quiz_questions (quiz_id, question) VALUES (1, 'What port is for SMTP?');
 
 INSERT INTO quiz_questions (quiz_id, question) VALUES (2, 'What year was The Rock released?');
 INSERT INTO quiz_questions (quiz_id, question) VALUES (2, 'What year was Pulp Fiction Released?');
