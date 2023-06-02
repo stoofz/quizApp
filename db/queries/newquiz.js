@@ -43,8 +43,8 @@ const insertAnswer = function (questionId, answer, isCorrect) {
 
 //need to update this function to take in an array of questions
 
-const createNewQuiz = function (userId, quizTitle, generatorObj, privacy) {
-  return new Promise((resolve, reject) => {
+const createNewQuiz = async function(userId, quizTitle, generatorObj, privacy) {
+  try {
     const queryStr = `
     INSERT INTO quizzes (quiz_owner_id, title, public)
     VALUES ($1, $2, $3)
@@ -52,48 +52,38 @@ const createNewQuiz = function (userId, quizTitle, generatorObj, privacy) {
 
     const queryParams = [userId, quizTitle, privacy];
 
-    db.query(queryStr, queryParams)
-      .then(data => {
-        const quizId = data.rows[0].id;
+    const data = await db.query(queryStr, queryParams);
 
+    const quizId = data.rows[0].id;
 
-        //INSERT LOOP HERE, TO LOOP THROUGH QUESTIONS ARRAY.
+    const questionArray = [];
 
-        for (const questionNum in generatorObj["questions"]) {
-          createQuestion(quizId, generatorObj["questions"][questionNum]["question"])
-            .then(questionData => {
-              console.log(questionData);
-              // This block of code is executed when the createQuestion promise is resolved successfully.
-              const questionId = questionData.id;
-              const answerPromises = [];
-              let isCorrect = false;
-              for (const answer of generatorObj["questions"][questionNum]["answers"]) {
-                console.log(answer);
-                isCorrect = answer === generatorObj["questions"][questionNum]["correctAnswer"] ? true : false;
-                answerPromises.push(insertAnswer(questionId, answer, isCorrect));
-              }
+    //INSERT LOOP HERE, TO LOOP THROUGH QUESTIONS ARRAY.
 
-              Promise.all(answerPromises)
-                .then(answers => {
-                  questionData.answers = answers;
-                  resolve(questionData); // Resolve with the final questionData
-                })
-                .catch(error => {
-                  reject(error); // Reject if any error occurs during answerPromises
-                });
-            })
-            .catch(error => {
-              reject(error); // Reject if createQuestion promise is rejected
-            });
+    for (const questionNum in generatorObj["questions"]) {
+      const questionData = await createQuestion(quizId, generatorObj["questions"][questionNum]["question"]);
+      console.log(questionData);
+      // This block of code is executed when the createQuestion promise is resolved successfully.
+      const questionId = questionData.id;
+      const answerPromises = [];
+      let isCorrect = false;
 
-        }
+      for (const answer of generatorObj["questions"][questionNum]["answers"]) {
+        console.log(answer);
+        isCorrect = answer === generatorObj["questions"][questionNum]["correctAnswer"] ? true : false;
+        answerPromises.push(insertAnswer(questionId, answer, isCorrect));
+      }
 
-      })
-      .catch(error => {
-        reject(error); // Reject if db.query promise is rejected
-      });
+      const answers = await Promise.all(answerPromises);
+      questionData.answers = answers;
+      questionArray.push(questionData);
+    }
 
-  });
+    return questionArray; // Resolve with the final questionData
+
+  } catch (error) {
+    console.error(error); // Reject if db.query promise is rejected
+  }
 };
 
 // const createNewQuiz = function (userId, quizTitle, question, answers, correctAnswer, privacy) {
