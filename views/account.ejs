@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>User Account</title>
+
+
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/nav.css" />
+  <link rel="stylesheet" href="/styles/account.css" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+  crossorigin="anonymous"
+  />
+
+  <!-- App JS -->
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/app.js"></script>
+</head>
+
+<body>
+  <%- include('partials/_header') %>
+
+  <div class="account-header">
+    <h1>🥔 User Account</h1>
+    </div>
+
+  <div class="account-container">
+
+
+
+    <div class="account-entry">
+
+    <h3><span class="account-header">Your Quizzes</span></h3>
+    <% myQuizzesData.forEach((item, index) => { %>
+      <ul class="entry-list"></ul>
+        <li class="entry-item">
+          <% if (index % 2 === 0) { %>
+            <li class="entry-item even">
+          <% } else { %>
+            <li class="entry-item odd">
+          <% } %>
+
+          <span class="entry-name"><a href="../quiz/<%= item.id %>"><%= item.title %></a></span>
+
+          <span class="entry-public">
+            <% if (item.public) { %>
+                Public
+              <% } else { %>
+                Private
+              <% } %>
+          </span>
+          </li>
+          <% }) %>
+    </div>
+    </div>
+
+</body>
+
+</html>
