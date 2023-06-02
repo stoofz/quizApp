@@ -23,15 +23,11 @@ router.get('/:user_id', async(req, res) => {
     const user = await getUserById(req.session.userId);
     const myQuizzesData = await myQuizzes(req.session.userId);
 
-    console.log(myQuizzesData);
-
     const templateVars = {
       user,
       myQuizzesData
     };
 
-
-    console.log(req.params.user_id);
     res.render('../views/account', templateVars);
 
   } catch (err) {
