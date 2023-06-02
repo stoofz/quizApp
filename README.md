@@ -1,7 +1,9 @@
 # QuizApp
 
-An app that lets you create quizzes and share them between friends. 
-The creator of the quiz can view and share all the results at the end of the quiz.
+An app that lets you create quizzes and share them between friends. You can
+keep them private or set them public to show on the home page. 
+The creator of the quiz can view and share the results at the end of the quiz.
+Also you can compete for leaderboards!
 
 ## Screenshots
 
