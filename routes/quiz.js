@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { createQuizArray, insertQuizAttempt, loadCorrectAnswers, findAnswerId, insertUserAnswer, addQuizResult, quizExistCheck } = require('../db/queries/quiz');
 const { validUserCheck } = require('../db/queries/login');
-const { getUserById } = require('../db/queries/userinfo.js')
+const { getUserById } = require('../db/queries/userinfo.js');
 
 // Display quiz to be attempted based on params
 router.get('/:quiz_id', async(req, res) => {

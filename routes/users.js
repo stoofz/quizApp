@@ -12,9 +12,9 @@ const { validUserCheck } = require('../db/queries/login');
 const router = express.Router();
 
 
-router.get('/', (req, res) => {
-  res.render('users');
-});
+// router.get('/', (req, res) => {
+//   res.render('users');
+// });
 
 // Post endpoint to add a new user to the database, bcrypts the password
 router.post('/register', async(req, res) => {
