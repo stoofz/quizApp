@@ -60,19 +60,14 @@ const createNewQuiz = async function(userId, quizTitle, generatorObj, privacy) {
 
     for (const questionNum in generatorObj["questions"]) {
       const questionData = await createQuestion(quizId, generatorObj["questions"][questionNum]["question"]);
-      console.log(questionData);
       // This block of code is executed when the createQuestion promise is resolved successfully.
       const questionId = questionData.id;
-      const answerPromises = [];
       let isCorrect = false;
 
       for (const answer of generatorObj["questions"][questionNum]["answers"]) {
-        console.log(answer);
         isCorrect = answer === generatorObj["questions"][questionNum]["correctAnswer"] ? true : false;
-        answerPromises.push(insertAnswer(questionId, answer, isCorrect));
+        await insertAnswer(questionId, answer, isCorrect);
       }
-
-      await Promise.all(answerPromises);
     }
 
   } catch (error) {
