@@ -17,4 +17,21 @@ body {
     rgba(163, 208, 219, 1) 74%,
     rgba(163, 208, 219, 1) 100%
   );
+
+  .link-button {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    font-size: 20px;
+  }
+
+  .link-button:hover {
+    background-color: #007bff;
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+  }
 }
