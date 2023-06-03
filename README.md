@@ -9,9 +9,13 @@ Also you can compete for leaderboards!
 
 !["Login"](/docs/login.PNG)
 
+!["Home"](/docs/home.PNG)
+
 !["Quiz"](/docs/quiz.PNG)
 
 !["Leadeboards"](/docs/leaderboards.PNG)
+
+!["Management"](/docs/managetment.PNG)
 
 ## Dependencies
 
