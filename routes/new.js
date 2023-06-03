@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', async(req, res) => {
+router.post('/', async (req, res) => {
 
   // Assigning variables to the req.body content acquired from form submission.
   const submission = req.body;
@@ -81,6 +81,52 @@ router.post('/', async(req, res) => {
     correctAnswer2 = q2a4;
   }
 
+
+
+  // Question 3
+  const quest3 = submission.quest3;
+  const q3a1 = submission.q3a1;
+  const q3a2 = submission.q3a2;
+  const q3a3 = submission.q3a3;
+  const q3a4 = submission.q3a4;
+  const answers3 = [q3a1, q3a2, q3a3, q3a4];
+  let correctAnswer3 = submission.correctAnswer3;
+
+
+  //Matching the correct answer with the options.
+  if (correctAnswer3 === "option1") {
+    correctAnswer3 = q3a1;
+  } else if (correctAnswer3 === "option2") {
+    correctAnswer3 = q3a2;
+  } else if (correctAnswer3 === "option3") {
+    correctAnswer3 = q3a3;
+  } else if (correctAnswer3 === "option4") {
+    correctAnswer3 = q3a4;
+  }
+
+
+
+  // Question 4
+
+  const quest4 = submission.quest4;
+  const q4a1 = submission.q4a1;
+  const q4a2 = submission.q4a2;
+  const q4a3 = submission.q4a3;
+  const q4a4 = submission.q4a4;
+  const answers4 = [q4a1, q4a2, q4a3, q4a4];
+  let correctAnswer4 = submission.correctAnswer4;
+
+  //Matching the correct answer with the options.
+  if (correctAnswer4 === "option1") {
+    correctAnswer4 = q4a1;
+  } else if (correctAnswer4 === "option2") {
+    correctAnswer4 = q4a2;
+  } else if (correctAnswer4 === "option3") {
+    correctAnswer4 = q4a3;
+  } else if (correctAnswer4 === "option4") {
+    correctAnswer4 = q4a4;
+  }
+
   //Set up of quiz object to be fed into query function.
   const generatorObj = {
     title: submission.quizTitle,
@@ -94,22 +140,23 @@ router.post('/', async(req, res) => {
         question: quest2,
         answers: answers2,
         correctAnswer: correctAnswer2
+      },
+      q3: {
+        question: quest3,
+        answers: answers3,
+        correctAnswer: correctAnswer3
+      },
+      q4: {
+        question: quest4,
+        answers: answers4,
+        correctAnswer: correctAnswer4
       }
     }
   };
 
-  // Question 3
-
-
-
-
-  // Question 4
-
-
   //Setting the privacy setting (t/f) for quiz.
   let privacy = submission.privacySetting;
   privacy = (privacy === 'public') ? 'TRUE' : 'FALSE';
-  //console.log("Privacy is : " + privacy);
 
   await createNewQuiz(userId, title, generatorObj, privacy);
 

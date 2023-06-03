@@ -1,6 +1,12 @@
 const db = require('../connection');
 
 
+/**
+ * Creates a new question for a quiz.
+ * @param {number} quizId - The ID of the quiz the question belongs to.
+ * @param {string} question - The text of the question.
+ * @returns {Promise<object>} A promise that resolves to the created question object.
+ */
 const createQuestion = function (quizId, question) {
   return new Promise((resolve, reject) => {
     const queryStr = `
@@ -19,6 +25,14 @@ const createQuestion = function (quizId, question) {
       });
   });
 };
+
+/**
+ * Inserts an answer for a question.
+ * @param {number} questionId - The ID of the question the answer belongs to.
+ * @param {string} answer - The text of the answer.
+ * @param {boolean} isCorrect - Indicates whether the answer is correct or not.
+ * @returns {Promise<object>} A promise that resolves to the inserted answer object.
+ */
 
 const insertAnswer = function (questionId, answer, isCorrect) {
   return new Promise((resolve, reject) => {
@@ -41,9 +55,14 @@ const insertAnswer = function (questionId, answer, isCorrect) {
 };
 
 
-//need to update this function to take in an array of questions
-
-const createNewQuiz = async function(userId, quizTitle, generatorObj, privacy) {
+/**
+ * Creates a new quiz along with its questions and answers.
+ * @param {number} userId - The ID of the user creating the quiz.
+ * @param {string} quizTitle - The title of the quiz.
+ * @param {object} generatorObj - The generator object containing questions and answers.
+ * @param {boolean} privacy - The privacy setting of the quiz (true for unlisted, false for public).
+ */
+const createNewQuiz = async function (userId, quizTitle, generatorObj, privacy) {
   try {
     const queryStr = `
     INSERT INTO quizzes (quiz_owner_id, title, public)
@@ -56,7 +75,7 @@ const createNewQuiz = async function(userId, quizTitle, generatorObj, privacy) {
 
     const quizId = data.rows[0].id;
 
-    //INSERT LOOP HERE, TO LOOP THROUGH QUESTIONS ARRAY.
+    // Iterating through the req.body object "generatorObj" creating a new question in each loop along with answers from the respective answers array.
 
     for (const questionNum in generatorObj["questions"]) {
       const questionData = await createQuestion(quizId, generatorObj["questions"][questionNum]["question"]);
@@ -74,53 +93,6 @@ const createNewQuiz = async function(userId, quizTitle, generatorObj, privacy) {
     console.error(error); // Reject if db.query promise is rejected
   }
 };
-
-// const createNewQuiz = function (userId, quizTitle, question, answers, correctAnswer, privacy) {
-//   return new Promise((resolve, reject) => {
-//     const queryStr = `
-//     INSERT INTO quizzes (quiz_owner_id, title, public)
-//     VALUES ($1, $2, $3)
-//     RETURNING id;`;
-
-//     const queryParams = [userId, quizTitle, privacy];
-
-//     db.query(queryStr, queryParams)
-//       .then(data => {
-//         const quizId = data.rows[0].id;
-
-
-//         //INSERT LOOP HERE, TO LOOP THROUGH QUESTIONS ARRAY.
-//         createQuestion(quizId, question)
-//           .then(questionData => {
-//             // This block of code is executed when the createQuestion promise is resolved successfully.
-//             const questionId = questionData.id;
-//             const answerPromises = [];
-//             let isCorrect = false;
-//             for (const answer of answers) {
-//               isCorrect = answer === correctAnswer ? true : false;
-//               answerPromises.push(insertAnswer(questionId, answer, isCorrect));
-//             }
-
-//             Promise.all(answerPromises)
-//               .then(answers => {
-//                 questionData.answers = answers;
-//                 resolve(questionData); // Resolve with the final questionData
-//               })
-//               .catch(error => {
-//                 reject(error); // Reject if any error occurs during answerPromises
-//               });
-//           })
-//           .catch(error => {
-//             reject(error); // Reject if createQuestion promise is rejected
-//           });
-//       })
-//       .catch(error => {
-//         reject(error); // Reject if db.query promise is rejected
-//       });
-
-//   });
-// };
-
 
 module.exports = {
   createQuestion,
