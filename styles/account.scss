@@ -49,6 +49,17 @@
   color: #000000;
 }
 
-.entry-public {
+.button-box {
 margin-left: auto;
+margin-bottom: 0.5em;
+display: flex;
+justify-content: space-between;
+align-items: center;
+
+}
+
+.entry-public,
+.entry-delete {
+  align-self: flex-end;
+  margin-left: 1em;
 }

@@ -54,14 +54,28 @@
 
           <span class="entry-name"><a href="../quiz/<%= item.id %>"><%= item.title %></a></span>
 
+          <div class="button-box">
           <span class="entry-public">
-            <% if (item.public) { %>
-                Public
-              <% } else { %>
-                Private
-              <% } %>
+            <form action="/account/state/<%= user.id %>/<%= item.id %>" method="POST">
+              <input type="hidden" name="state" value="<%= !item.public %>" />
+              <button type="submit" class="btn btn-primary">
+                <% if (item.public) { %>
+                  Public
+                <% } else { %>
+                  Private
+                <% } %>
+                </button>
+            </form>
           </span>
-          </li>
+
+          <span class="entry-delete">
+            <form action="/account/delete/<%= user.id %>/<%= item.id %>" method="POST">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </span>
+
+        </div>
+      </li>
           <% }) %>
     </div>
     </div>
