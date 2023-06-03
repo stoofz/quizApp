@@ -4,11 +4,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
 .card-container {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
 .card {
   border: 1px solid #495057;
   border-radius: 8px;
