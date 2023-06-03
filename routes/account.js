@@ -77,15 +77,9 @@ router.post('/state/:user_id/:quiz_id/', async(req, res) => {
       return;
     }
 
-
-    console.log(req.params.quiz_id);
-    console.log(req.session.userId);
-    console.log(req.body.state);
-
     await changePublic(req.params.quiz_id, req.body.state);
 
     res.redirect(302, `/account/${req.session.userId}`);
-
 
   } catch (err) {
     console.error('Error:', err);
@@ -93,7 +87,6 @@ router.post('/state/:user_id/:quiz_id/', async(req, res) => {
   }
 
 });
-
 
 
 module.exports = router;
