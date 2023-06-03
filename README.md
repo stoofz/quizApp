@@ -15,7 +15,7 @@ Also you can compete for leaderboards!
 
 !["Leadeboards"](/docs/leaderboards.PNG)
 
-!["Management"](/docs/managetment.PNG)
+!["Management"](/docs/management.PNG)
 
 ## Dependencies
 
