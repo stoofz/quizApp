@@ -1,6 +1,6 @@
 const db = require('../connection');
 
-
+// get user info by id
 const getUserById = function(userId) {
   return new Promise((resolve, reject) => {
 

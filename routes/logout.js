@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-// Clears session cookie
+// Clears session cookie and logout
 router.post('/logout', async(req, res) => {
   try {
     req.session = null;

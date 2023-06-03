@@ -1,5 +1,6 @@
 const db = require('../connection');
 
+// display quizzes created by user
 const myQuizzes = function(userId) {
   return db.query(`
   SELECT quizzes.id, quizzes.title, quizzes.public
@@ -16,6 +17,7 @@ const myQuizzes = function(userId) {
     });
 };
 
+// delete quiz
 const delQuiz = function(quizId) {
   return db.query(`
     DELETE
@@ -30,7 +32,7 @@ const delQuiz = function(quizId) {
     });
 };
 
-
+// toggle quiz public/private
 const changePublic = function(quizId, bool) {
   return db.query(`
     UPDATE quizzes

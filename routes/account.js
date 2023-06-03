@@ -36,7 +36,7 @@ router.get('/:user_id', async(req, res) => {
   }
 });
 
-
+// Delete quiz
 router.post('/delete/:user_id/:quiz_id', async(req, res) => {
   try {
     // Check if user is logged in with valid user id
@@ -62,7 +62,7 @@ router.post('/delete/:user_id/:quiz_id', async(req, res) => {
 
 });
 
-
+// Toggle quiz between private or public
 router.post('/state/:user_id/:quiz_id/', async(req, res) => {
   try {
     // Check if user is logged in with valid user id

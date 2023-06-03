@@ -7,7 +7,7 @@ const getUsers = () => {
     });
 };
 
-
+// add new user
 const addUser = function(userName, hashedPassword, email) {
   return db.query(
     `INSERT INTO users (name, password, email)
@@ -21,6 +21,7 @@ const addUser = function(userName, hashedPassword, email) {
     });
 };
 
+// check if user already exists
 const userExists = function(email) {
   return db.query(
     `SELECT * FROM users

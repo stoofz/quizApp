@@ -1,5 +1,6 @@
 const db = require('../connection');
 
+// display all public quizzes
 const getPublicQuizzes = function() {
   return db.query(
     `SELECT *

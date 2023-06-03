@@ -4,6 +4,7 @@ const { mostPopular, mostTaken, mostCreated, mostDifficult } = require('../db/qu
 const { validUserCheck } = require('../db/queries/login');
 const { getUserById } = require('../db/queries/userinfo.js');
 
+// Display leaderboards
 router.get('/', async(req, res) => {
   try {
 

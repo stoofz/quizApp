@@ -1,6 +1,6 @@
 const db = require('../connection');
 
-
+// users with the most created quizzes
 const mostCreated = function() {
   return db.query(`
   SELECT name, COUNT(quiz_owner_id) AS count
@@ -18,7 +18,7 @@ const mostCreated = function() {
     });
 };
 
-
+// users who taken the most quizzes
 const mostTaken = function() {
   return db.query(`
   SELECT name, COUNT(quiz_id) AS count
@@ -35,7 +35,7 @@ const mostTaken = function() {
     });
 };
 
-
+// most popular quizzes
 const mostPopular = function() {
   return db.query(`
   SELECT title, COUNT(quiz_id) AS count, quizzes.id
@@ -52,7 +52,7 @@ const mostPopular = function() {
     });
 };
 
-
+// most difficult quizzes based on average score after 5 attempts
 const mostDifficult = function() {
   return db.query(`
   SELECT title, COUNT(quiz_attempts.quiz_id) AS count, ROUND((AVG(quiz_attempts.quiz_result) / COUNT(DISTINCT quiz_questions.question)) * 100) AS avg_percentage, quizzes.id

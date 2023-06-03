@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+// error page
 router.get('/error', (req, res) => {
   try {
     const errorMessage = decodeURIComponent(req.query.message);
