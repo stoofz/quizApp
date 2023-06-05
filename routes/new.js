@@ -34,7 +34,6 @@ router.post('/', async (req, res) => {
 
   // Assigning variables to the req.body content acquired from form submission.
   const submission = req.body;
-  //console.log("submission: " + submission);
   const userId = req.session.userId;
 
   const title = submission.quizTitle;
@@ -159,8 +158,6 @@ router.post('/', async (req, res) => {
   privacy = (privacy === 'public') ? 'TRUE' : 'FALSE';
 
   await createNewQuiz(userId, title, generatorObj, privacy);
-
-  //await createNewQuiz(userId, title, quest1, answers1, correctAnswer1, privacy);
 
   res.redirect('/');
 });
